@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="navigation.MasterPage.ContactPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" IconImageSource="plus.png" Order="Primary" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="New" IconImageSource="plus.png" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <StackLayout >
+
+
+        <SearchBar Placeholder="name..." TextChanged="SearchBar_TextChanged"  />
+
+        <ListView x:Name="list" SeparatorColor="Aqua"
+              HasUnevenRows="True" 
+              SeparatorVisibility="Default"
+              ItemSelected="list_ItemSelected"
+              IsPullToRefreshEnabled="True"
+              Refreshing="list_Refreshing" 
+              
+                  
+              
+              >
+
+
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ViewCell >
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Call" Clicked="Call_Clicked"
+                                  CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete" Clicked="Delete_Clicked"
+                                  CommandParameter="{Binding .}"
+                                  IsDestructive="True" />
+
+                        </ViewCell.ContextActions>
+                        <StackLayout Orientation="Horizontal" Spacing="20" BackgroundColor="Black">
+                            <Image Source="{Binding ImageUrl}" Aspect="AspectFit"
+                               />
+
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+
+
+                                <StackLayout Orientation="Horizontal" >
+
+                                    <Label Text="{Binding Name}" FontAttributes="Bold"  TextColor="WhiteSmoke" />
+                                    <Frame HeightRequest="10" WidthRequest="10" CornerRadius="5" HorizontalOptions="Start"
+                                       VerticalOptions="Start" Margin="0" Padding="0" BackgroundColor="#00fc0e" />
+                                </StackLayout>
+                                <Label Text="{Binding Status}" TextColor="Wheat"  />
+
+                            </StackLayout >
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="Following" TextColor="Aqua" />
+                                
+
+                            </StackLayout >
+
+
+                        </StackLayout>
+
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Forms.FormPages.FormPage2">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0">
+                <StackLayout  Spacing="10" >
+
+                    <Picker x:Name="contactMethods"
+                               HorizontalOptions="CenterAndExpand"
+                            SelectedIndexChanged="contactMethods_SelectedIndexChanged"
+                           
+                            Title="Contact Method">
+                        <Picker.Items>
+                            <x:String>SMS</x:String>
+                            <x:String>Email</x:String>
+                            <x:String>WhatsApp</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="1">
+                <StackLayout  Spacing="10" >
+
+                    <Picker x:Name="picker"
+                               HorizontalOptions="CenterAndExpand"
+                            SelectedIndexChanged="contactMethods_SelectedIndexChanged_2"
+           
+                            Title="Contact Methods 2">
+                       
+                        
+                    </Picker>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="2">
+                <StackLayout  Spacing="10" >
+
+                    <DatePicker Date="{x:Static sys:DateTime.Today}" Format="d MMM yyyy"
+                                MinimumDate="1 Jan 1994" 
+                                
+                                
+                                DateSelected="DatePicker_DateSelected" />
+
+                    <Label x:Name="dLabel" />
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+        
+       
+    </ContentPage.Content>
+</ContentPage>

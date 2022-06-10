@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:vm="clr-namespace:AzureBotApp.ViewModels"
+             xmlns:uc="clr-namespace:AzureBotApp.Views.UserControls" 
+                xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
+             x:Class="AzureBotApp.Views.CustomBotPage" 
+             Title="Chat Bot">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:CustomBotPageViewModel x:Key="cvm" />
+            <uc:ChatViewCellTemplateSelector x:Key="chatTemplateSelector" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            
+            
+        </Grid.RowDefinitions>
+        
+        <ListView x:Name="chatListView"
+            Grid.Row="0"
+                  HasUnevenRows="True" 
+                  SeparatorVisibility="None"
+            ItemsSource="{Binding MessagesChat}"
+                  ItemTemplate="{StaticResource chatTemplateSelector}"
+                  
+                  >
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ScrollListCommand}"
+                                              CommandParameter="{Binding Source={x:Reference chatListView}}" />
+            </ListView.Behaviors>
+            
+        </ListView>
+
+        <StackLayout Orientation="Horizontal" 
+                     HorizontalOptions="FillAndExpand" 
+                     Grid.Row="1">
+            <Entry HorizontalOptions="FillAndExpand" Text="{Binding Message,Mode=TwoWay}" />
+            <Button Text="Send" TextColor="White"
+                    WidthRequest="75"
+                    BackgroundColor="#0EB1D2" 
+                    Command="{Binding SendCommand}"/>
+        </StackLayout>
+        
+    </Grid>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.GridPageExercise2"
+             BackgroundColor="#127ac7">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.3*" />
+            
+
+        </Grid.RowDefinitions>
+
+        <StackLayout Orientation="Vertical" 
+                     Grid.Row="0" HorizontalOptions="Center"
+ VerticalOptions="Center" >
+
+            <Label Text="Welcome TO StackLayout" TextColor="White"
+               FontSize="30" FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+            <Label Text="Cross-platform apps made easy" 
+              HorizontalOptions="Center" TextColor="White" FontSize="18" />
+
+
+
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical"  Grid.Row="1"
+              Padding="15" 
+                     HorizontalOptions="Fill">
+            <Button Text="Login" TextColor="White" BackgroundColor="DeepSkyBlue" />
+
+
+            <Button Text="Register"  TextColor="White" BackgroundColor="DeepSkyBlue" />
+
+
+
+        </StackLayout>
+
+
+       
+    </Grid>
+</ContentPage>

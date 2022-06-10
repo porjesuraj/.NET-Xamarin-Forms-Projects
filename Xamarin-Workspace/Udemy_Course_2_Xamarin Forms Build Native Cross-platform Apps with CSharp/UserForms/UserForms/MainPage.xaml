@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UserForms.MainPage">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="BackgroundColor" Value="#6437f1" />
+
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="Black" >
+        <StackLayout  Spacing="5" Padding="5" Margin="70">
+
+
+
+
+
+            <Button Text="Hierarchical Navigation" Clicked="Button_Clicked"  />
+   
+
+        </StackLayout>
+    </Frame>
+</ContentPage>

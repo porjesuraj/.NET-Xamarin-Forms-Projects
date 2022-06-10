@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="navigation.Pages.DisplayPage1">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Black">
+            <Button Text="Click for Alert" Clicked="Button_Clicked" BackgroundColor="#6437f1" TextColor="White"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button Text="Click for ActionSheet" Clicked="Button_Clicked_1"  BackgroundColor="#6437f1" TextColor="White"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

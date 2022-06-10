@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamlEssential.MainPage">
+
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10">
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Xaml Essentials!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Button Text=" helloworld Page" Clicked="Button_Clicked_3" BackgroundColor="LawnGreen" />
+        <Button Text=" DataBinding Page" Clicked="Button_Clicked" BackgroundColor="LawnGreen" />
+        <Button Text="Slider Page" Clicked="Button_Clicked_1" BackgroundColor="LawnGreen"/>
+        <Button Text="Exercise App page" Clicked="Button_Clicked_2" BackgroundColor="LawnGreen"/>
+        
+    </StackLayout>
+
+</ContentPage>

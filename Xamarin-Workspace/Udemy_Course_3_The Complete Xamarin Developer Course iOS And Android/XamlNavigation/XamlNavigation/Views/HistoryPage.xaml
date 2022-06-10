@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+           
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             
+             prism:ViewModelLocator.AutowireViewModel="True"
+           
+             x:Class="XamlNavigation.Views.HistoryPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout HorizontalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True" >
+        
+        
+        
+        <ListView x:Name="postListView" 
+                  BackgroundColor="#f111" 
+                  SelectedItem="{Binding SelectedPost}" 
+                  IsPullToRefreshEnabled="True" 
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefresh}"
+                  >
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior EventName="ItemSelected"
+                                              Command="{Binding PostSelectedCommand}"
+                                              EventArgsConverter="{StaticResource ItemSelectedConverter }" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell x:Name="textCell" Text="{Binding Experience}" TextColor="White" >
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete" IsDestructive="True" BindingContext="{Binding Source={x:Reference postListView}, 
+                                Path=BindingContext}" Command="{Binding DeletePostCommand}" 
+                                      CommandParameter="{Binding Source={x:Reference textCell},
+                                Path=BindingContext}" />
+                        </TextCell.ContextActions>
+                        <!--<TextCell.ContextActions>
+                            <MenuItem Text = "Delete"
+                                     Command = "{Binding DeletePostCommand}" 
+                                      IsDestructive="True"/>
+                        </TextCell.ContextActions>-->
+                    
+                    </TextCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

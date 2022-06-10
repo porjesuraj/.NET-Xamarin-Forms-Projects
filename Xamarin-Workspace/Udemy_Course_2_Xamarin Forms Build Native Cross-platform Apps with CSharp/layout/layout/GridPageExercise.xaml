@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.GridPageExercise" BackgroundColor=" #354242">
+    <ContentPage.Resources>
+
+        <Style x:Key="number" TargetType="Button">
+
+            <Setter Property="FontSize" Value="30" />
+            <Setter 
+            Property="TextColor" Value="#28282c" />
+            <Setter Property="BackgroundColor" Value="#ffff" />
+            <Setter Property="CornerRadius" Value="30" />
+
+
+        </Style>
+               
+    </ContentPage.Resources>
+    <Grid Padding="40" RowSpacing="10" ColumnSpacing="10"  >
+ 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            
+
+        </Grid.ColumnDefinitions>
+
+
+        <Label Text="1234" TextColor="White" Grid.ColumnSpan="3" Grid.Row="0" FontSize="50"  />
+
+        <Button Text="1" Grid.Row="1" Grid.Column="0"  Style="{StaticResource number}" />
+        <Button Text="2" Grid.Row="1" Grid.Column="1"  Style="{StaticResource number}" />
+        <Button Text="3" Grid.Row="1" Grid.Column="2"  Style="{StaticResource number}" />
+        <Button Text="4" Grid.Row="2" Grid.Column="0"  Style="{StaticResource number}" />
+        <Button Text="5" Grid.Row="2" Grid.Column="1"  Style="{StaticResource number}" />
+        <Button Text="6" Grid.Row="2" Grid.Column="2"  Style="{StaticResource number}" />
+        <Button Text="7" Grid.Row="3" Grid.Column="0"  Style="{StaticResource number}" />
+        <Button Text="8" Grid.Row="3" Grid.Column="1"  Style="{StaticResource number}" />
+        <Button Text="9" Grid.Row="3" Grid.Column="2"  Style="{StaticResource number}" />
+        <Button Text="0" Grid.Row="4" Grid.Column="1"  Style="{StaticResource number}" />
+        <Button Text="Dial"  Grid.Row="5" Grid.ColumnSpan="3" BackgroundColor="#96ca2d" HorizontalOptions="Fill" CornerRadius="20"/>
+
+    </Grid>
+</ContentPage>

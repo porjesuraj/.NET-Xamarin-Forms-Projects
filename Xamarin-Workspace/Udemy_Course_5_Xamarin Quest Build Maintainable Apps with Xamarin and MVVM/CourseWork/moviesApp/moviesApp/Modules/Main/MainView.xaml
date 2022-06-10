@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+           
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             
+             x:Class="moviesApp.Modules.Main.MainView"
+             Title="Movies App"  NavigationPage.HasNavigationBar="False" 
+             
+             sharedTransitions:SharedTransitionNavigationPage.TransitionSelectedGroup="{Binding SelectedMovieId}" 
+             >
+    <ContentPage.Content>
+        <StackLayout Margin="0,5,5,0">
+            <Label Text="Movie Search " HorizontalTextAlignment="Center" FontSize="Title" TextColor="Black" FontAttributes="Bold" Padding="10" />
+            <SearchBar Text="{Binding SearchTerm}" SearchCommand="{Binding PerformSearchCommand}"  Placeholder="Enter Movie Name"/>
+
+            <CollectionView ItemsSource="{Binding Items}"  
+                            SelectionMode="Single" 
+                            SelectedItem="{Binding SelectedMovie}"
+                            SelectionChangedCommand="{Binding MovieChangedCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout >
+
+
+                            <Frame Padding="0" CornerRadius="50"
+                           Margin="10,20,10,0"
+                           HorizontalOptions="Center"
+
+                           IsClippedToBounds="True" >
+
+                                <Grid  >
+                                    <ffimageloading:CachedImage LoadingPlaceholder="placeholder.png"
+                                                    Aspect="AspectFill" 
+                                                    
+                                                    HeightRequest="300"
+                                                    
+                                                    Source="{Binding ImageUrl}"
+                                                                sharedTransitions:Transition.Name="MovieImage"
+                                                                sharedTransitions:Transition.Group="{Binding imdbID}"
+                                                    />
+                                    <Label VerticalOptions="End" 
+                               FontSize="28"
+                               TextColor="White"
+                               BackgroundColor="Black"
+                               Opacity="0.85"
+                               VerticalTextAlignment="Center"
+                               Padding="15,0,5,0"
+                               HeightRequest="70"
+                               LineBreakMode="WordWrap"
+                               
+                               
+                               Text="{Binding Title}" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center">
+                        <Image Source="placeholder.png"
+                               WidthRequest="200"
+                               HeightRequest="200" />
+                        <Label HorizontalOptions="Center" 
+                               Padding="20,10,10,10"
+                               Text="Enter Your Search Term Above ..."
+                               FontSize="24"
+                               TextColor="Gray" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

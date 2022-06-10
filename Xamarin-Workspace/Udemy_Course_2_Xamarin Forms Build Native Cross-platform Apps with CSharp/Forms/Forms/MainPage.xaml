@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.MainPage" Title="Forms Demo ">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="BackgroundColor" Value="#fa0543" />
+
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="#e5e8dc">
+        <StackLayout  Spacing="5" Padding="5" Margin="70">
+
+
+
+
+
+            <Button Text="Form Control Page" Clicked="Button_Clicked"  />
+            <Button Text="Form Control Page 2" Clicked="Button_Clicked_2"  />
+            <Button Text="Table View Page " Clicked="Button_Clicked_3"  />
+         
+
+
+        </StackLayout>
+    </Frame>
+</ContentPage>

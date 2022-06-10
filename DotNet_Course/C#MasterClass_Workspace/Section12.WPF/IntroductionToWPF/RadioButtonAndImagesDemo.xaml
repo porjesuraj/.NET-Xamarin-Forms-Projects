@@ -1,0 +1,40 @@
+﻿<Page x:Class="IntroductionToWPF.RadioButtonAndImagesDemo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IntroductionToWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RadioButtonAndImagesDemo">
+
+    <StackPanel Background="Black">
+
+        <Label Content="Do you like me" FontWeight="Bold" ></Label>
+
+        <RadioButton Checked="Yes_Checked" Margin="5" >
+            <WrapPanel>
+                <Rectangle Fill="Green" Width="16" Height="16" />
+                <TextBlock   Margin="5,0,0,0" Text="Yes" Foreground="Green" />
+                
+            </WrapPanel>
+        </RadioButton>
+
+        <RadioButton Checked="No_Checked" Margin="5" >
+            <WrapPanel>
+                <Rectangle Fill="Red" Width="16" Height="16" />
+                <TextBlock Margin="5,0,0,0" Text="No" Foreground="Red" />
+
+            </WrapPanel>
+        </RadioButton>
+
+        <RadioButton Checked="Maybe_Checked" Margin="5" IsChecked="True">
+            <WrapPanel>
+                <Image Source="C:\Users\surajpor\Desktop\DotNet_Course\Assets\maybe.gif" Width="32" Height="32" />
+                <TextBlock  Margin="5,0,0,0" Text="Maybe" Foreground="Yellow" />
+
+            </WrapPanel>
+        </RadioButton>
+
+    </StackPanel>
+</Page>

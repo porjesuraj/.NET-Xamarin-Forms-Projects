@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="MyReadBooksPrismApp.Views.BooksPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding NewBookCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Books Page" />
+
+            <ListView x:Name="booksListView" ItemsSource="{Binding SavedBooks}" >
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ListItemSelectedCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference booksListView}}"
+                                                  />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding thumbnail}"  Text="{Binding title}" Detail="{Binding authors}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

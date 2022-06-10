@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HelloWorld.MainPage" 
+             Title="HelloWorld Demos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BackgroundColor" Value="#1DF62A" />
+                <Setter Property="TextColor" Value="#212321" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="#3E3E3E" >
+
+
+        <StackLayout Margin="16,0,16,0"   >
+
+            <Button Text="Demo 1" Clicked="Button_Clicked"  />
+        
+
+        </StackLayout>
+    </Frame>
+</ContentPage>

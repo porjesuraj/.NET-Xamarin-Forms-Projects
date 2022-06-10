@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converter="clr-namespace:moviesApp.Common.Convertors"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             x:Class="moviesApp.Modules.MovieDetails.MovieDetailsView" 
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToFavoriteImageConverter x:Key="boolToFavorite" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White" >
+                <StackLayout>
+                    
+               
+                <Grid>
+                    <ffimageloading:CachedImage Source="{Binding MoviesData.ImageUrl}" Aspect="AspectFill" HeightRequest="500"
+                                                sharedTransitions:Transition.Name="MovieImage"/>
+                    <Frame WidthRequest="40"
+                            HeightRequest="40"
+                            Margin="0,50,30,0"
+                            Padding="0"
+                            VerticalOptions="Start"
+                            HorizontalOptions="End" CornerRadius="20" >
+                        
+                    <ImageButton Source="close.png" BackgroundColor="White"
+                                 Command="{Binding GoBackCommand}" />
+                    </Frame>
+
+                </Grid>
+                    <Label Text="{Binding MoviesData.Title}"
+                           Padding="20,8,0,0"
+                           FontAttributes="Bold" 
+                           FontSize="Title" />
+                    <Grid > 
+                    <Label Text="{Binding MoviesData.Year, StringFormat='Year: {0}'}" Padding="20,8,0,0" TextColor="Gray" />
+                    <ImageButton x:Name="imageButton" Source="{Binding IsFavorite,Converter={StaticResource boolToFavorite}}" 
+                                 HorizontalOptions="End" 
+                                 Margin="0,0,30,0"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 BackgroundColor="White" 
+                                 Command="{Binding FavoriteCommand}" Clicked="ImageButton_Clicked" />
+                    </Grid>
+                   
+                    <xct:Expander>
+                        <xct:Expander.Header>
+                            <Label Text="Plot (Click to Expand)"
+                                   Padding="20"
+                                   FontAttributes="Bold" 
+                                   FontSize="Medium" />
+                        </xct:Expander.Header>
+                        <Grid Padding="10">
+                            
+                            
+                            <Label Text="{Binding MovieInformation.Plot}" Padding="20,0,20,0" TextColor="Gray" />
+                        </Grid>
+                    </xct:Expander>
+
+                    <xct:Expander>
+                        <xct:Expander.Header>
+                            <Label Text="Cast (Click to Expand)"
+                                   Padding="20"
+                                   FontAttributes="Bold" 
+                                   FontSize="Medium" />
+                        </xct:Expander.Header>
+                        <Grid Padding="10">
+
+
+                            <Label Text="{Binding MovieInformation.Actors}" Padding="20,0,20,0" TextColor="Red" />
+                        </Grid>
+                    </xct:Expander>
+
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

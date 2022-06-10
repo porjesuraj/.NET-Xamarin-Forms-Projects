@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            
+             xmlns:local="clr-namespace:images.MarkUpExtensions"
+             x:Class="images.Pages.EmbeddedPage"
+             
+             >
+    <StackLayout >
+
+        <Label Text=" using C#" HorizontalOptions="Center" />
+        <Image x:Name="image"  Aspect="AspectFit" HeightRequest="100"/>
+
+
+        <Label Text=" using Xaml Markup" HorizontalOptions="Center" />
+        <Image x:Name="XImage"  Aspect="AspectFit" HeightRequest="175"
+               Source="{local:EmbeddedImage ResourceId=images.images.background.jpg}"
+               />
+
+        <Label Text=" using Xaml Markup with attribute" HorizontalOptions="Center" />
+        <Image x:Name="XImage2"  Aspect="AspectFit" HeightRequest="225"
+               Source="{local:EmbeddedImage images.images.background.jpg}"
+               />
+    </StackLayout>
+    
+</ContentPage>

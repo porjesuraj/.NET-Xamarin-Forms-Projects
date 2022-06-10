@@ -1,0 +1,31 @@
+﻿<Application x:Class="IntroductionToWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:IntroductionToWPF"
+             StartupUri="MainWindow.xaml"
+            
+             >
+
+    <!--StartupUri="PasswordBoxDemo.xaml"-->
+    <!--StartupUri="EventTriggerDemo.xaml"-->
+    <!--StartupUri="RadioButtonAndImagesDemo.xaml"-->
+    <!--StartupUri="CheckBoxDemo.xaml"-->
+    <!-- StartupUri="ComboBoxDemo.xaml"-->
+    <!--StartupUri="ListBoxDemo.xaml"-->
+
+    <!--StartupUri="INotifyPCDemo.xaml"-->
+    <!--StartupUri="DataBindingDemo.xaml"-->
+
+    <!--StartupUri="DependencyPropertiesDemo.xaml"-->
+    <!--StartupUri="GridExercise.xaml"-->
+    <!--StartupUri="GridDemo.xaml"-->
+    <!--StartupUri="RoutedEventExercise.xaml"-->
+    <!--StartupUri="RoutedEventDemo.xaml"-->
+    <!--StartupUri="StackPanelDemo.xaml"-->
+    <!--StartupUri="CodeBehindDemo.xaml"-->
+    <!--StartupUri="XamlDemo.xaml"-->
+
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

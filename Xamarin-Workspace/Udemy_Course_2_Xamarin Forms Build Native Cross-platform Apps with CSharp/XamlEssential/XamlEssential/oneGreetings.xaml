@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamlEssential.oneGreetings"  BackgroundColor="Black">
+
+    <StackLayout  HorizontalOptions="Center" VerticalOptions="Center">
+
+    
+        <Label Text="Hello World" TextColor="White" FontSize="Large"  x:Name="label"/>
+
+
+        <Slider Minimum="0" Maximum="100" ValueChanged="Slider_ValueChanged" x:Name="slider" ThumbColor="Aqua" />
+    </StackLayout>
+    
+</ContentPage>

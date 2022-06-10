@@ -1,0 +1,557 @@
+#!markdown
+
+# To Learn Design Patterns 
+
+## 1. Design Pattern Explained
+
+1.  What are Design Patterns 
++ Design patterns are reusable solutions to the problems that we encounter in the day to day programming. 
++ They are generally targeted at solving the problems of object generation and integration. 
++ In other words, Design patterns acts as templates which can be applied to the real-world programming problems.
+
+2. History and evolution of design Patterns
++ The four authors of the book famously know as Gang of four are the ones who brought the concepts of design patterns in their book “Elements of reusable Object-Oriented software” . 
++ Gang of Four has divided the book into two parts with first part explaining about the pros and cons of object oriented programming
++  and the second part describes the evolution of 23 classic software design patterns.
+* For more details, <a href="https://en.wikipedia.org/wiki/Design_Patterns"> wikipedia article </a>
+
+
+3. **Types of Design Patterns**
++ Gang of Four have categorised the design patterns in to 3 types based on different problems encountered in the real world applications.
++  They are Creational, Structural and Behavioural.
+ 1. Creational design patterns :
+     +  These patterns deal with object creation and initialization.
+     +   Creational pattern gives the program more flexibility in deciding which objects need to be created for a given case.
+     + Examples of Creational design patterns category : Singleton , Factory and Abstract Factory etc.
+
+2. Structural design patterns : 
+     + This pattern deals with class and object composition.
+     +  In simple words, This pattern focuses on decoupling interface, implementation of classes and its objects. 
+     + Examples of Structural design patterns category : Adapter,  Facade and Bridge etc.
+
+2. Behavioural design patterns :
+     +   These patterns deal with communication between Classes and objects.
+     + Examples of Behavioural design patterns : Chain of Responsibility, Command and Interpreter etc.
+
+#!markdown
+
+## 2. Singleton Pattern
++ Singleton Pattern  belongs to Creational type pattern.
++  As discussed in our previous video, Gang of four have defined five design patterns that belongs to creational design type category.
++   Singleton is one among them and the rest are Factory, Abstract Factory, Builder and Prototype patterns. 
++   As the name implies, creational design type deals with object creation mechanisms. 
++   Basically, to simplify this, creational pattern explain us the creation of objects in a manner suitable to a given situation.
++ Singleton design pattern is used when we need to ensure that only one object of a particular class is Instantiated. That single instance created is responsible to coordinate actions across the application.
+
+!['sdp.png'](sdp.png)
+* Singleton Design Pattern
++ If you look at the illustrated diagram above you will see different objects trying to invoke an object instantiated as singleton. 
++ This single instance of the object is responsible to invoke underneath methods or events.
+
+1. Advantages 
++ Concurrent access to the resource is well managed by singleton design pattern.
+
+2. Guidelines for Singleton implementation.
++ As part of the Implementation guidelines we need to ensure that only one instance of the class exists by declaring all constructors of the class to be private. 
++  Also, to control the singleton access we need to provide a static property that returns a single instance of the object.
+
+3. why we need to seal the class when a private constructor is present. 
+ + we are able to create multiple instances of the singleton using the nested derived class.
+ + This violates the principle of singleton. 
+ + if we make  the class as sealed. we get an error when we compile the program saying we cannot derive a sealed class. 
+ + With this we have proved that private constructor helps in preventing any external instantiations of objects and
+ +  sealed will prevent the class inheritances.
+4. Singleton Class Implementation Example
+
+#!csharp
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+// Create Singleton object in main method
+
+    /* running the two methods in parralel shows that in multi threaded environment
+     multiple instance are created of singleton object, due to race condition 
+    */
+    Parallel.Invoke(
+        () => PrintEmployeeDetails(),
+        () => PrintStudentDetails()
+        );
+
+
+    // if Singleton class is not Sealed, we can create multiple instance using derived class
+    /*Console.WriteLine("-----------------------");
+ Singleton.DerivedSingleton derivedObj = new Singleton.DerivedSingleton();
+ derivedObj.PrintDetials("from Derived");*/
+  
+private static void PrintEmployeeDetails()
+{
+    Singleton fromEmployee = Singleton.GetInstance;
+    fromEmployee.PrintDetials("From Employee ");
+}
+
+private static void PrintStudentDetails()
+{
+    Singleton fromStudent = Singleton.GetInstance;
+    fromStudent.PrintDetials("From Student");
+}
+
+    /// <summary>
+    /// creating singleton class using the class Property, its good for working with single thread,
+    /// if used in  multi-threads application , it result in race condition 
+    /// </summary>
+   
+
+    // sealed keyword restricts the inheritence 
+   public sealed class Singleton
+    {
+
+        private static int counter = 0;
+
+        private static readonly object obj = new object();
+
+        /// <summary>
+        /// public property is used to return only one instance of the class
+        /// levereging on the private property
+        /// </summary>
+        private static Singleton instance = null;
+
+        public static Singleton GetInstance
+        {
+            get
+            {
+                // double check locking ,as lock checking is a heavy process
+                if (instance == null)
+                {
+
+                    // lock object so that only one thread can access the code at a time 
+                    lock (obj)
+                    {
+                        if (instance == null)
+                            instance = new Singleton();
+                    }
+                }
+                return instance;
+            }
+        }
+
+
+        /// <summary>
+        /// private constructor ensures that object is not created outside the class
+        /// </summary>
+        private Singleton()
+        {
+            counter++;
+            Console.WriteLine("intsance of class are {0}",counter);
+        }
+
+        /// <summary>
+        /// Public method which can be invoked through the singleton instance
+        /// </summary>
+        /// <param name="message"></param>
+        public void PrintDetials(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+     // Inner class to show what if class is not sealed
+        /*public class DerivedSingleton : Singleton
+      {
+
+      }*/
+    }
+
+#!markdown
+
+###  Singleton with Multi-threading 
+6. Lazy Initialization in Singleton :
+   + GetInstance Property is responsible for the Singleton Instance creation.
+   +  Singleton object is not instantiated until and unless GetInstance is invoked.
+   +   Hence, there is a delay in instance creation till the GetInstance is accessed. 
+   +   This Delay in Instance creation is called Lazy Initialization.
+7. How to use Multithreads in Singleton : 
+   + The lazy initialization works perfectly well when we invoke the GetInstance in a Single threaded approach.
+   +  However, there is a chance that we may end up creating multiple instances when multiple threads invoke the GetInstance at the same time.
+
+
+8. How to implement a Thread Safe singleton class 
++ Locks are the best way to control thread race condition and they help us to overcome the present situation
+
+```c#
+class Singleton
+{
+
+
+  private static int counter = 0;
+
+        private static readonly object obj = new object();
+
+        /// <summary>
+        /// public property is used to return only one instance of the class
+        /// levereging on the private property
+        /// </summary>
+        private static Singleton instance = null;
+
+ public static Singleton GetInstance
+        {
+            get
+            {
+                // double check locking ,as lock checking is a heavy process
+                if (instance == null)
+                {
+
+                    // lock object so that only one thread can access the code at a time 
+                    lock (obj)
+                    {
+                        if (instance == null)
+                            instance = new Singleton();
+                    }
+                }
+                return instance;
+            }
+        }
+}
+
+```
+
+###  difference between Lazy Initialization and Eager Initialization
+
+8. Lazy Initialization :
+ +  The lazy initialization of an object improves the performance and avoids unnecessary computation till the point the object is accessed. 
+ +  Further, it reduces the memory footprint during the startup of the program. Reducing the memory print will help faster loading of the application.
+
+9. Non-Lazy or Eager Loading :
+ +  Eager loading is nothing but to initialize the required object before it’s being accessed.
+ +    Which means, we instantiate the object and keep it ready and use it when we need it. 
+ +    This type of initialization is used in lower memory footprints. 
+ +    Also, in eager loading, the common language runtime takes care of the variable initialization and its thread safety.
+ +     Hence, we don’t need to write any explicit coding for thread safety.
+
+
+10. Singleton with Lazy keyword (.NET 4.0) 
++  Lazy keyword provides support for lazy initialization.
++   In order to make a property as lazy, we need to pass the type of object to the lazy keyword which is being lazily initialized.
++ By default, Lazy<T> objects are thread-safe.  
++ In multi-threaded scenarios, the first thread which tries to access the Value property of the lazy object will take care of thread safety when multiple threads are trying to access the Get Instance at the same time.
++ Therefore, it does not matter which thread initializes the object or if there are any thread race conditions that are trying to access this property.
+```c#
+class Singleton
+{
+      /// <summary>
+        /// public property is used to return only one instance of the class
+        /// levereging on the private property,
+        /// as lazy<> objects are thread safe, so we dont need to use lock here even in lazy loading
+        /// </summary>
+        private static readonly Lazy<Singleton_Lazy> instance = new Lazy<Singleton_Lazy>(() => new Singleton_Lazy());
+
+        public static Singleton_Lazy GetInstance
+        {
+            get
+            {
+                
+                return instance.Value;
+            }
+        }
+
+}
+
+```
+
+11. Singleton with Eager Loading 
+
+```c#
+ public sealed class Singleton_Eager
+    {
+
+        private static int counter = 0;
+
+     
+
+        /// <summary>
+        /// public property is used to return only one instance of the class
+        /// levereging on the private property
+        /// as we instantiate the variable at start using readonly keyword so its eager loading 
+        /// as its static readonly we cannot assign a new value to it, so no new instance can be created
+        /// </summary>
+        private static readonly Singleton_Eager instance = new Singleton_Eager();
+
+        /// <summary>
+        /// here no lock is needed as CLR takes care of variable initialization and thread safety
+        /// </summary>
+
+        public static Singleton_Eager GetInstance
+        {
+            get
+            {
+                
+                return instance;
+            }
+        }
+
+    }
+
+```
+### Singleton vs Static
+12. Differences between Singleton and static classes
++ Static is a keyword and Singleton is a design pattern
++ Static classes can contain only static members
++ Singleton is an object creational pattern with one instance of the class
++ Singleton can implement interfaces, inherit from other classes and it aligns with the OOPS concepts
++ Singleton object can be passed as a reference
++ Singleton supports object disposal
++ Singleton object is stored on heap
++ Singleton objects can be cloned
+
+13. Real world usage of Singleton :
++  Listed are few real world scenarios for singleton usage
+1. Exception/Information logging
+2. Connection pool management 
+3. File management
+4. Device management such as printer spooling
+5. Application Configuration management
+6. Cache management
+7. And Session based shopping cart
+
+
+14.  create a custom logger library using Singleton design pattern which logs exceptions to an external file
+ 
+```c#
+public  interface ILogger
+    {
+
+        void LogException(string message);
+    }
+
+public sealed class Log : ILogger
+{
+
+    
+
+    private static readonly Lazy<Log> instance = new Lazy<Log>( () => new Log());
+
+
+    public static  Log GetInstance
+    {
+        get { return instance.Value ; }
+       
+    }
+
+    private Log()
+    {
+       
+    }
+
+    public void LogException(string message)
+    {
+        string fileName = string.Format("{0}_{1}.log", "Exception", DateTime.Now.ToShortDateString());
+        string logFilepath = string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, fileName);
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("--------------------------------------------");
+        sb.AppendLine(DateTime.Now.ToString());
+        sb.AppendLine(message);
+        using(StreamWriter writer = new StreamWriter(logFilepath,true))
+        {
+            writer.Write(sb.ToString());
+            writer.Flush();
+        }
+    }
+}
+
+```
+
+#!markdown
+
+## 3. Factory Design Pattern
+
+### 1. What is Factory Design Pattern
++ Gang of Four Definition “Define an interface for creating an object, but let sub-classes decide which class to instantiate.
++  The Factory method lets a class defer instantiation it uses to sub-classes”
++ Factory pattern is one of the most used design patterns in real world applications
++ Factory pattern creates object without exposing the creation logic to the client and refer to newly created object using a common interface
+
+> [Client] -> [Factory] ->[Product]
++ From the above diagram, client uses factory and creates the product.
+
+### 2. Implementation Guidelines : 
+ + We need to choose Factory Pattern when
+ 1. The Object needs to be extended to subclasses
+ 2. The Classes doesn’t know what exact sub-classes it has to create
+ 3. The Product implementation tend to change over time and the Client remains unchanged
+ + Simple Factory Example : Business Requirement
+ 
+ * Differentiate employees as permanent and contract and segregate their pay scales as well as bonus based on their employee types
+ + We can address the above requirement with the below implementations
+  1. Implement without Factory Pattern
+  2. Use a Simple Factory
+  3. Enhance Simple factory to Factory Method Pattern
+
+
++ Implement without Factory Pattern 
+```c#
+  public ActionResult Create([Bind(Include = "Id,Name,JobDescription,Number,Department,EmployeeTypeId")] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {          
+                // based on employee type id assign values, here we have tight coupling in code
+             if(employee.EmployeeTypeId == 1)
+                {
+                    employee.HourlyPay = 8;
+                    employee.Bonus = 10;
+                }else if(employee.EmployeeTypeId == 2)
+                {
+                    employee.HourlyPay = 12;
+                    employee.Bonus = 5;
+                }
+                db.Employees.Add(employee);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+```
+
++ Use a Simple Factory
+1. Simple factory abstracts the creation details of the product
+2. Simple factory refers to the newly created object through an interface
+3. Any new type creation is handled with a change of code in the factory class and not in the client code
+```c#
+
+// use interace to get values
+public interface iEmployeeManager
+    {
+
+        decimal GetBonus();
+
+        decimal GetPay(); 
+    }
+    // contrere class implementing the interface 
+ public class PermanentEmployeeManager : iEmployeeManager
+    {
+        public decimal GetBonus()
+        {
+            return 10;
+        }
+
+        public decimal GetPay()
+        {
+             return 8;
+        }
+    }
+
+
+// factory method
+  public iEmployeeManager GetEmployeeManager(int employeeTypeId)
+        {
+            iEmployeeManager returnValue = null;
+            // here we can use a if- else or switch case  
+            // with an enum of employeeTypeId
+            if (employeeTypeId == 1)
+                returnValue = new PermanentEmployeeManager();
+            else if (employeeTypeId == 2)
+                returnValue = new ContractEmployeeManager();
+
+            return returnValue;
+
+        }
+
+// use of factory method 
+          public ActionResult Create([Bind(Include = "Id,Name,JobDescription,Number,Department,EmployeeTypeId")] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+
+                EmployeeManagerFactory employeeManagerFactory = new EmployeeManagerFactory();
+                iEmployeeManager employeeManager = employeeManagerFactory.GetEmployeeManager(employee.EmployeeTypeId);
+                employee.Bonus = employeeManager.GetBonus();
+                employee.HourlyPay = employeeManager.GetPay();
+
+         
+                db.Employees.Add(employee);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+        }
+```
+
++  Enhance Simple factory to Factory Method Pattern
+
+!['factoryPattern'](fm.png)
+```c#
+ public abstract  class BaseEmployeeFactory
+    {
+        protected Employee _emp;
+
+
+        public BaseEmployeeFactory(Employee emp)
+        {
+            _emp = emp;
+        }
+
+        public abstract iEmployeeManager Create();
+
+
+        public Employee ApplySalary()
+        {
+            iEmployeeManager manager = this.Create();
+
+            _emp.Bonus = manager.GetBonus();
+
+            _emp.HourlyPay = manager.GetPay();
+
+            return _emp;
+        }
+    }
+
+ public class PermanentEmployeeFactory : BaseEmployeeFactory
+    {
+        public PermanentEmployeeFactory(Employee emp) : base(emp)
+        {
+
+        }
+
+        public override iEmployeeManager Create()
+        {
+            PermanentEmployeeManager manager = new PermanentEmployeeManager();
+            _emp.HouseAllowance = manager.GetHouseAllowance();
+            return manager;
+        }
+    }
+
+     public class ContractEmployeeFactory : BaseEmployeeFactory
+    {
+        public ContractEmployeeFactory(Employee emp) : base(emp)
+        {
+        }
+
+        public override iEmployeeManager Create()
+        {
+            ContractEmployeeManager manager = new ContractEmployeeManager();
+
+            _emp.MedicalAllowance = manager.GetMedicalAllowance();
+
+            return manager;
+        }
+    }
+
+      public BaseEmployeeFactory CreateFactory(Employee employee)
+        {
+            BaseEmployeeFactory returnValue = null;
+            if (employee.EmployeeTypeId == 1)
+                returnValue = new PermanentEmployeeFactory(employee);
+            else if (employee.EmployeeTypeId == 2)
+                returnValue = new ContractEmployeeFactory(employee);
+
+            return returnValue;
+        }
+
+        // in controller 
+
+           // using factory pattern 
+               BaseEmployeeFactory empFactory = new EmployeeManagerFactory1().CreateFactory(employee);
+                empFactory.ApplySalary();
+```

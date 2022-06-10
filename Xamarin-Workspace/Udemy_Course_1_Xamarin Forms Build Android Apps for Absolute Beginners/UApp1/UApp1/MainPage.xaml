@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UApp1.MainPage"
+             Title="Basic Button click">
+
+    <StackLayout BackgroundColor="Aquamarine">
+
+        <Entry x:Name="entry" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="300"
+                
+                />
+
+        <Button x:Name="button" Clicked="OnButtonClicked" 
+                BindingContext="{x:Reference entry}"
+                CornerRadius="5" Text="click here" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{Binding Text}"/>
+        
+    </StackLayout>
+
+</ContentPage>

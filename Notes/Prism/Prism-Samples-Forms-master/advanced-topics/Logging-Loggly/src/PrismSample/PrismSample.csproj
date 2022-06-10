@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\*.png" />
+    <EmbeddedResource Include="Images\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.DryIoc.Forms" />
+    <PackageReference Include="Prism.Plugin.Logging.Loggly" />
+    <PackageReference Include="Xamarin.Forms" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+           xmlns:ffimageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+           xmlns:fonticons="clr-namespace:FontAwesome" xmlns:views="clr-namespace:MakeUpStoreApplication.Views"
+          xmlns:converter="clr-namespace:MakeUpStoreApplication.Common.Converter"
+           x:Class="MakeUpStoreApplication.Views.AddToCartPopup"
+           Size="400,400">
+    <xct:Popup.Resources>
+        <ResourceDictionary>
+            <xct:IntToBoolConverter x:Key="IntToBoolConverter" />
+            <xct:DoubleToIntConverter x:Key="DoubleToIntConverter" />
+            <converter:DoubleToBoolConverter x:Key="DoubleToBoolConverter" />
+            <converter:StringToBoolConverter x:Key="StringToBoolConverter" />
+        </ResourceDictionary>
+    </xct:Popup.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ffimageLoading:CachedImage x:Name="productImage" LoadingPlaceholder="makeup.png"  Grid.RowSpan="2" Grid.Column="0"
+                                    Source="{Binding ImageLink}" 
+                                    Margin="15"
+                                    Aspect="AspectFill" />
+        <Label Text="{Binding Name}"  FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" />
+        <Label  Grid.Row="1" Grid.Column="1" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static fonticons:FontAwesomeIcons.DollarSign}" FontFamily="FAS" FontSize="30"  />
+                    <Span Text="{Binding  Price}" FontAttributes="Bold" FontSize="30" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+
+        <StackLayout Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Label Text="Description " BackgroundColor="LightGray" FontAttributes="Bold" FontSize="Title" />
+            <ScrollView>
+                <Label Text="{Binding Description}" FontSize="Medium" />
+
+            </ScrollView>
+               
+            </StackLayout>
+       
+
+
+            <StackLayout Orientation="Horizontal"  Grid.Row="4" Grid.Column="0" >
+
+            <ImageButton  Clicked="Minus_Button_Clicked" Margin="0"  BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.MinusCircle}" FontFamily="FAS" 
+                                     Color="Gray" Size="40" />
+                </ImageButton.Source>
+            </ImageButton>
+            <Label x:Name="quantityLabel" FontSize="30" Margin="5,0,5,0" VerticalOptions="Center"/>
+            <ImageButton  Clicked="Plus_Button_Clicked"  BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.PlusCircle}" FontFamily="FAS" 
+                                     Color="Gold" Size="40" />
+                </ImageButton.Source>
+            </ImageButton>
+           
+        </StackLayout>
+            <Button x:Name="AddButton"   Grid.Row="4" Grid.Column="1" Margin="12" CornerRadius="10"
+                       FontSize="15" 
+                HorizontalOptions="Center" Text="  Add To Cart  " BackgroundColor="OrangeRed" TextColor="White" 
+                IsEnabled="{Binding Source={x:Reference quantityLabel},Path=Text,Converter={StaticResource StringToBoolConverter}}"
+                 Clicked="Button_Clicked" >
+            
+
+            </Button>
+      
+       
+       
+    </Grid>
+
+</xct:Popup>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Students>
+	<Student>
+		<Name>Toni</Name>
+		<Age>23</Age>
+		<University>Yale</University>
+		<SportsPlayed>Football</SportsPlayed>
+	</Student>
+	<Student>
+		<Name>Jake</Name>
+		<Age>25</Age>
+		<University>Oxford</University>
+		<SportsPlayed>Cricket</SportsPlayed>
+
+	</Student>
+	<Student>
+		<Name>Rice</Name>
+		<Age>26</Age>
+		<University>Carla</University>
+		<SportsPlayed>BasketBall</SportsPlayed>
+
+	</Student>
+
+	<Student>
+		<Name>Shanaracharya</Name>
+		<Age>56</Age>
+		<University>TakshaShila</University>
+		<SportsPlayed>Chess</SportsPlayed>
+
+	</Student>
+</Students>

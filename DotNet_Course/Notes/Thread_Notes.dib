@@ -1,0 +1,253 @@
+#!markdown
+
+# Thread
+
+1. Creating Threads
+
+#!csharp
+
+using System.Threading;
+
+Console.WriteLine("Hello World 1");
+Thread.Sleep(1000);
+Console.WriteLine("Hello World 2");
+Thread.Sleep(1000);
+Console.WriteLine("Hello World 3");
+Thread.Sleep(1000);
+Console.WriteLine("Hello World 4");
+Console.WriteLine("Hello World 5");
+
+#!markdown
+
+2. Thread used in parallel so execution sequence may be different 
+
+#!csharp
+
+using System.Threading;
+
+new Thread(() =>
+{
+   
+    Console.WriteLine("Thread 1");
+}).Start();
+
+
+ new Thread(() =>
+ {
+     Thread.Sleep(1);
+     Console.WriteLine("Thread 2");
+ }).Start();
+
+new Thread(() =>
+{
+    
+    Console.WriteLine("Thread 3");
+}).Start();
+
+#!markdown
+
+3. Using Task Completion Source
++ to check when a task is completed , if returns a bool value , indicating task status 
++ if completed or not 
+
+#!csharp
+
+var taskCompletionSource = new TaskCompletionSource<bool>();
+
+var thread = new Thread(() =>
+{
+    Console.WriteLine($"Thread number : {Thread.CurrentThread.ManagedThreadId} started");
+
+    taskCompletionSource.TrySetResult(true);
+    Console.WriteLine($"Thread number : {Thread.CurrentThread.ManagedThreadId} ended");
+
+});
+
+thread.Start();
+
+var test = taskCompletionSource.Task.Result;
+
+Console.WriteLine("task was done {0}",test);
+
+#!markdown
+
+4. ThreadPool
++ used to do specific workItem 
++ wait until one thread is finished to start with a new thread
++ thread in managed thread pool are background threads
++ thread pool reuses thread there are available 
+
+#!csharp
+
+new Thread(() =>
+{
+    Console.WriteLine("Created a Background thread");
+})
+{ IsBackground = true }.Start();
+
+// to run over a range 
+Enumerable.Range(0, 10).ToList().ForEach(f =>
+ {
+     new Thread(() =>
+     {
+         ThreadPool.QueueUserWorkItem((o) =>
+         {
+             Console.WriteLine($"Thread number : {Thread.CurrentThread.ManagedThreadId} started");
+
+           
+             Console.WriteLine($"Thread number : {Thread.CurrentThread.ManagedThreadId} ended");
+
+         });
+        
+     }).Start();
+ });
+
+#!markdown
+
+5. THread Join and ISALive methods
+
+#!csharp
+
+           Console.WriteLine("Main Thread Started");
+
+            Thread thread1 = new Thread(Thread1Function);
+            Thread thread2 = new Thread(Thread2Function);
+
+            thread1.Start();
+            thread2.Start();
+
+
+            thread1.Join();
+            Console.WriteLine("THread1Function done");
+            thread2.Join();
+            Console.WriteLine("THread2Function done");
+
+
+            if(thread1.Join(1000))
+            {
+                Console.WriteLine("THread1Function done in 1 second");
+
+            }else
+                Console.WriteLine("THread1Function not done in 1 second");
+
+
+            Console.WriteLine("Main Thread Ended");
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (thread1.IsAlive)
+                {
+                    Console.WriteLine("thread1 is still working");
+                   
+                }
+                else
+                {
+                    Console.WriteLine("thread1 ended");
+
+                }
+
+            }
+
+            
+
+            Console.ReadLine();
+        
+        private static void Thread1Function()
+        {
+            Console.WriteLine("Thread1Function started");
+           Thread.Sleep(1);
+            Console.WriteLine("Thread1Function coming back to caller");
+        }
+        private static void Thread2Function()
+        {
+            Console.WriteLine("Thread2Function started");
+        }
+
+#!markdown
+
+## Task with WPF 
+
+1. we should not do non UI task on Main thread 
+2. only MianThread can access UI element , if other tread tries to access them we get Exception
+> System.InvalidOperationException: 'The calling thread cannot access this object because a different thread owns it.'
++ heavy work can be given to other thread, so our main thread is free for UI operation
+3. two methods to complete task without blocking the Main thread are
+ + using Dispatcher.Invoke (Main Thread)
+ + using async and await
+ + 
+4. first approach
+
+```c#
+        private void TaskButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                Debug.WriteLine($"THread Number {Thread.CurrentThread.ManagedThreadId}");
+
+
+                HttpClient webClient = new HttpClient();
+
+                string html = webClient.GetStringAsync("https://google.com").Result;
+                // string html2 = webClient.GetStringAsync("https://ipv4.download.thinkbroadband.com/5MB.zip").Result;
+
+                // go to main thread for UI operation
+                myButton.Dispatcher.Invoke(() =>
+                {
+                    myButton.Content = "Done";
+                    Debug.WriteLine($"THread Number {Thread.CurrentThread.ManagedThreadId} owns myButton");
+
+                    // downloadedTextBox.Text = html;
+
+
+                });
+
+            });       
+        }
+
+
+
+```
+
+2. Second Method of async and await 
+
+```c#
+private async void TaskButton_Clicked2()
+{
+    Debug.WriteLine($"Thread Number {Thread.CurrentThread.ManagedThreadId} before awaiting task ");
+
+   await Task.Run(async () =>
+    {
+
+
+        HttpClient webClient = new HttpClient();
+
+        string html = webClient.GetStringAsync("https://google.com").Result;
+        Debug.WriteLine($"Thread Number {Thread.CurrentThread.ManagedThreadId} while awaiting task");
+
+
+    });
+
+    // go to main thread for UI operation
+    Console.WriteLine("Task done ");
+   // myButton.Content = "Done";
+    Debug.WriteLine($"Thread Number {Thread.CurrentThread.ManagedThreadId} after await task");
+
+    // MessageBox.Show("Hi World");
+
+
+}
+
+```
+
+#!markdown
+
+## In order to understand Threads and Tasks better, I highly recommend to read through the following articles:
+
+1. <a href="https://docs.microsoft.com/en-gb/dotnet/standard/threading/managed-threading-best-practices" >  Managed Threading Best Practices</a> 
+
+2. <a href="https://docs.microsoft.com/en-gb/dotnet/standard/threading/synchronizing-data-for-multithreading" > Synchronizing Data for Multithreading </a> 
+
+3. <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.threadpool?redirectedfrom=MSDN&view=net-5.0" > ThreadPool Class </a> 
+
+4. <a href="https://stackoverflow.com/questions/894037/sample-code-to-illustrate-a-deadlock-by-using-lockthis?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa" > How to produce a Deadlock (avoid at all cost)  </a> 

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+              
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            xmlns:converter="clr-namespace:NewsApp.Common.Converter"
+             
+             
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+            
+             ios:Page.UseSafeArea="True"
+               xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewmodels="clr-namespace:NewsApp.ViewModels"
+             x:DataType="viewmodels:ArticleDetailsPageViewModel"
+             x:Class="NewsApp.Views.ArticleDetailsPage"
+             Title="{Binding ArticleDetails.Source.Name}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{OnPlatform Android=share2.png, iOS=share3.png }"  Text="Share" Command="{Binding ShareUrlCommand}"  />
+
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToImageConverter x:Key="boolToFavorite" />
+            <converter:BoolToSpeechImage x:Key="boolToSpeech" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout CompressedLayout.IsHeadless="True">
+        <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="White" >
+            <StackLayout>
+
+
+                <Grid>
+                    <ffimageloading:CachedImage LoadingPlaceholder="placeholder2.png" Source="{Binding ArticleDetails.UrlToImage}" Aspect="AspectFill" HeightRequest="500"
+                                     />
+                    <Frame WidthRequest="40"
+                            HeightRequest="40"
+                            Margin="0,50,30,0"
+                            Padding="0"
+                            VerticalOptions="Start"
+                            HorizontalOptions="End" CornerRadius="20" >
+
+                        
+                    </Frame>
+
+                </Grid>
+                <Label Text="{Binding ArticleDetails.Title}"
+                           Padding="20,8,0,0"
+                           FontAttributes="Bold" 
+                           FontSize="Title" />
+                <Grid >
+                    <Label Text="{Binding ArticleDetails.PublishedAt, StringFormat='Published on : {0:d/MM/yy}'}" Padding="20,8,0,0" TextColor="Gray" />
+                    <ImageButton x:Name="imageButton" Source="{Binding IsFavorite,Converter={StaticResource boolToFavorite}}" 
+                                 HorizontalOptions="End" 
+                                 Margin="0,0,10,0"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 BackgroundColor="White" 
+                                 Command="{Binding FavoriteCommand}" Clicked="ImageButton_Clicked" />
+                    <ImageButton x:Name="imageButton2" Source="{Binding IsSpeechOn,Converter={StaticResource boolToSpeech}}" 
+                                 HorizontalOptions="End" 
+                                 Margin="0,0,60,0"
+                                 WidthRequest="40"
+                                 HeightRequest="40"
+                                 BackgroundColor="White" 
+                                 Command="{Binding SpeakNowCommand}" Clicked="ImageButton_Clicked_2" />
+                </Grid>
+
+                <xct:Expander>
+                    <xct:Expander.Header>
+                        <Label Text="Description (Click to Expand)"
+                                   Padding="20"
+                                   FontAttributes="Bold" 
+                                   FontSize="Medium" />
+                    </xct:Expander.Header>
+                    <Grid Padding="10">
+
+
+                        <Label Text="{Binding ArticleDetails.Description}" Padding="20,0,20,0" TextColor="Gray" />
+                    </Grid>
+                </xct:Expander>
+                <xct:Expander>
+                    <xct:Expander.Header>
+                        <Label Text="Url to full Article (Click to Expand)"
+                                   Padding="20"
+                                   FontAttributes="Bold" 
+                                   FontSize="Medium" />
+                    </xct:Expander.Header>
+                    <Grid Padding="10">
+
+                        <Button Text="Go to Full Article " Command="{Binding GoToWebCommand}" BackgroundColor="DodgerBlue" TextColor="White"/>
+                      
+                    </Grid>
+                </xct:Expander>
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+   
+</ContentPage>

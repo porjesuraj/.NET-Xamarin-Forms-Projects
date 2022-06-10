@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+   NavigationPage.HasNavigationBar="True"
+        
+    
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamlNavigation.Views.MainPage"
+             
+            BackgroundColor="#1DB8F5"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BackgroundColor" Value="#1DB8F5" />
+                <Setter Property="TextColor" Value="#212321" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="#3E3E3E" >
+
+
+        <StackLayout Margin="16,0,16,0"  VerticalOptions="Center" >
+            <Image   Source="roundLogo.png"   Aspect="AspectFit"   />
+
+            <Button Text="Welcome to Travel App"  Command="{Binding ToLoginPageCommand}" />
+
+        </StackLayout>
+    </Frame>
+</ContentPage>

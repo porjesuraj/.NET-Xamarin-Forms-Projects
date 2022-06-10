@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrismDemo1.Views.PopUpDemo">
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="BackgroundColor" Value="#fa0543" />
+
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="#e5e8dc">
+        <StackLayout  Spacing="5" Padding="5" Margin="70">
+
+            
+            <Button Text="DisplayAlert" Command="{Binding AlertUserCommand}" />
+            <Button Text="DisplayAlert" Command="{Binding DisplayAlertCommand}"/>
+            <Button Text="DisplayActionSheet" Command="{Binding DisplayActionSheetCommand}" />
+            <Button Text="DisplayActionSheet using ActionSheetButtons" Command="{Binding DisplayActionButtonsCommand}" />
+
+
+           
+        </StackLayout>
+
+    </Frame>
+</ContentPage>

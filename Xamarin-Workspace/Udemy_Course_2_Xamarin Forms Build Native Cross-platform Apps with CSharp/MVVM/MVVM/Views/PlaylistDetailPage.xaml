@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVVM.Views.PlaylistDetailPage" 
+              BackgroundColor="#424242"
+             >
+    <ContentPage.Content>
+        <Frame BackgroundColor="Black" >
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="#424242">
+                <Label  HorizontalTextAlignment="Center" TextColor="White" Text="List" FontSize="20" FontAttributes="Bold"  />
+                <Label   Text="{Binding Title}" TextColor="{Binding Color}" FontSize="25"  HorizontalTextAlignment="Center" />
+                <Label    Text="{Binding IsFavorite, StringFormat='{0}'}"  TextColor="{Binding Color}" FontSize="25"  HorizontalTextAlignment="Center" />
+             
+                <Button Text="Back" Clicked="Button_Clicked" />
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

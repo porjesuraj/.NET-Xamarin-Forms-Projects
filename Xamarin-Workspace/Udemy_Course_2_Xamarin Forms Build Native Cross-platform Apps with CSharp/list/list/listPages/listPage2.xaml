@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="list.listPages.listPage2"
+             Title="list custom view and grouping items ">
+    <ListView x:Name="list" SeparatorColor="Aqua"
+              HasUnevenRows="True" 
+              SeparatorVisibility="Default"
+              IsGroupingEnabled="True"
+              GroupDisplayBinding="{Binding Title}"
+              GroupShortNameBinding="{Binding ShortTitle}"
+              
+              >
+        <ListView.ItemTemplate>
+
+            <DataTemplate>
+
+                <!--<ImageCell Text="{Binding Name}" 
+                           Detail="{Binding Status}" DetailColor="Wheat"
+                           ImageSource="{Binding ImageUrl}" Height="30"  />-->
+                <ViewCell >
+                    <StackLayout Orientation="Horizontal" Spacing="20" BackgroundColor="Black">
+                        <Image Source="{Binding ImageUrl}" Aspect="AspectFit"
+                               />
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                            <Label Text="{Binding Name}" FontAttributes="Bold"  TextColor="WhiteSmoke" />
+                            <Label Text="{Binding Status}" TextColor="Wheat"  />
+                           
+                        </StackLayout >
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="Follow" TextColor="Aqua" />
+                            <CheckBox />
+
+                        </StackLayout >
+                      
+
+                    </StackLayout>
+                        
+                </ViewCell>
+               
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        
+    </ListView>
+
+</ContentPage>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="navigation.MasterDetail.ContactDetailPage"
+             >
+    <ContentPage.Content>
+
+        <StackLayout  BackgroundColor="Black" > 
+
+        <Frame   BorderColor="Aqua"  VerticalOptions="FillAndExpand" Padding="0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="Auto" />
+                    
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                       Grid.Row="0"
+                               />
+                <StackLayout   Grid.Row="1" BackgroundColor="#424242">
+                  
+                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="30"  HorizontalTextAlignment="Center" TextColor="WhiteSmoke" />
+                  
+
+                        <Label Text="{Binding Status}" TextColor="Wheat"  FontSize="25"  HorizontalTextAlignment="Center" />
+                </StackLayout>
+
+            </Grid>
+        </Frame>
+
+
+
+       
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="dataAccess.DataPages.DataPage1">
+    <TableView Intent="Settings" >
+        <TableRoot>
+            <TableSection Title="Settings" >
+                <EntryCell x:Name="title" 
+                    Label="title"
+                           Text="{Binding Title}"
+                           Completed="OnChange"
+                           Placeholder="(eg. Work related)" />
+                <SwitchCell x:Name="notify"
+                    Text="Notification" 
+                            On="{Binding NotificationEnabled}" 
+                            OnChanged="OnChange"
+                            
+                             />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

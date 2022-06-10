@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    Title="Navigation Pages"
+   
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="navigation.MainPage"
+    BackgroundColor="Black"
+    >
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="BackgroundColor" Value="#6437f1" />
+           
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame BackgroundColor="Black" >
+    <StackLayout  Spacing="5" Padding="5" Margin="70">
+
+    
+            
+       
+
+        <Button Text="Hierarchical Navigation" Clicked="Button_Clicked"  />
+        <Button Text="Master Page Navigation" Clicked="Button_Clicked_2"  />
+        <Button Text="MasterDetail Page" Clicked="Button_Clicked_3"  />
+        <Button Text="Tabbed Page" Clicked="Button_Clicked_4"  />
+        <Button Text="Carousel Page" Clicked="Button_Clicked_5"  />
+        <Button Text="Display Action Page" Clicked="Button_Clicked_6"  />
+        <Button Text="Exercise  Page" Clicked="Button_Clicked_7"  />
+
+
+
+      
+
+    </StackLayout>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:fonticons="clr-namespace:FontAwesome"
+             xmlns:converter="clr-namespace:MakeUpStoreApplication.Common.Converter" 
+             xmlns:viewmodels="clr-namespace:MakeUpStoreApplication.ViewModels"
+             xmlns:model="clr-namespace:MakeUpStoreApplication.Common.Models"
+             x:DataType="viewmodels:ProductDetailsPageViewModel"
+             x:Class="MakeUpStoreApplication.Views.ProductDetailsPage"
+            BackgroundColor="LightGray"
+             >
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IntToBoolConverter x:Key="IntToBoolConverter" />
+            <xct:DoubleToIntConverter x:Key="DoubleToIntConverter" />
+            <converter:DoubleToBoolConverter x:Key="DoubleToBoolConverter" />
+            <converter:StringToBoolConverter x:Key="StringToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Frame BorderColor="Aqua" Margin="10" >
+        
+ 
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ffimageLoading:CachedImage x:Name="productImage" LoadingPlaceholder="makeup.png"  Grid.RowSpan="2" Grid.Column="0"
+                                    Source="{Binding ProductDetail.ImageLink}" 
+                                    Margin="15"
+                                    Aspect="AspectFill" />
+        <Label Text="{Binding ProductDetail.Name}"  FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" />
+        <Label  Grid.Row="1" Grid.Column="1" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static fonticons:FontAwesomeIcons.DollarSign}" FontFamily="FAS" FontSize="30"  />
+                    <Span Text="{Binding  ProductDetail.Price}" FontAttributes="Bold" FontSize="30" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+
+        <StackLayout Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Label Text="Description " BackgroundColor="LightGray" FontAttributes="Bold" FontSize="Title" />
+            <ScrollView>
+                <Label Text="{Binding ProductDetail.Description}" FontSize="Medium" />
+
+            </ScrollView>
+
+        </StackLayout>
+
+
+
+        <StackLayout Orientation="Horizontal"  Grid.Row="4" Grid.Column="0" >
+
+            <ImageButton  Command="{Binding MinusButtonCommand}" Margin="0"  BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.MinusCircle}" FontFamily="FAS" 
+                                     Color="Gray" Size="40" />
+                </ImageButton.Source>
+            </ImageButton>
+            <Entry Text="{Binding Quantity,Mode=TwoWay}" FontSize="30" Margin="5,0,5,0" VerticalOptions="Center"/>
+            <ImageButton   Command="{Binding PlusButtonCommand}"  BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.PlusCircle}" FontFamily="FAS" 
+                                     Color="Gold" Size="40" />
+                </ImageButton.Source>
+            </ImageButton>
+
+        </StackLayout>
+        <Button   Grid.Row="4" Grid.Column="1" 
+                       
+                HorizontalOptions="Start" Text="{Binding TotalAmount}" BackgroundColor="OrangeRed" TextColor="White" 
+                IsEnabled="{Binding Quantity,Converter={StaticResource IntToBoolConverter}}"
+               Command="{Binding AddToCartCommand}" />
+        <Button  Grid.Row="4" Grid.Column="1" Text="Cancel" 
+                 TextColor="Black"
+                 HorizontalOptions="End"
+                 BackgroundColor="LightGray"
+                 Command="{prism:GoBack ToRoot}" />
+
+
+
+
+
+
+    </Grid>
+    </Frame>
+</ContentPage>

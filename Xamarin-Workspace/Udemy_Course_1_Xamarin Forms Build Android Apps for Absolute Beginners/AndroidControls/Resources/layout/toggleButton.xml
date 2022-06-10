@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+  
+    
+    android:id="@+id/linearlayout">
+    <TextView
+        android:text="Toggle Light"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_marginHorizontal="250px"
+        android:layout_marginVertical="250px"
+        />
+    
+   
+        <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="55px"
+        android:id="@+id/toggleButton1"
+        android:checked="true"
+      
+        android:textColor="#0f0"
+        android:background="#000" 
+        android:textColorHighlight="#000fff"
+        
+       
+        
+        />
+
+</LinearLayout>

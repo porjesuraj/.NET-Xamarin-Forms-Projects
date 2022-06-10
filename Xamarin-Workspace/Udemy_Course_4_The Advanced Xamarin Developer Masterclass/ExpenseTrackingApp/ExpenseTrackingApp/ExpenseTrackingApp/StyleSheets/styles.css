@@ -1,0 +1,18 @@
+﻿body
+{
+}
+
+listview{
+    margin:20;
+}
+
+^label{
+    color:black;
+}
+
+.titleLabel{
+    
+    font-weight:bold;
+    margin:20,20,20,0;
+    color:rebeccapurple;
+}

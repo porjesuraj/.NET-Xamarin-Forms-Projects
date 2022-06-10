@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  x:Name="history"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalculatorApp.Views.HistoryPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <SwipeView>
+                <SwipeView.RightItems>
+                    <SwipeItems>
+                        <SwipeItem Text="Delete "
+                                   BackgroundColor="LightGreen" />
+                        
+                    </SwipeItems>
+                </SwipeView.RightItems>
+                <Grid HeightRequest="100" >
+                    
+                
+                <Label Text="Swipe right" HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                </Grid>
+            </SwipeView>
+
+            
+            <ListView x:Name="testList" ItemsSource="{Binding Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem  Text="Delete" BackgroundColor="Red"
+                                                Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference history}}"
+                                                CommandParameter="{Binding}" 
+                                                />
+                                </SwipeView.RightItems>
+                                <Grid Padding="0,15,0,15">
+                                    <Label Text="{Binding .}" />
+                                </Grid>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

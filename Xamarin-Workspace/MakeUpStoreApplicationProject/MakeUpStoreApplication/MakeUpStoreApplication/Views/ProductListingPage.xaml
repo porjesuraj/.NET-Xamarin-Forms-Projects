@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+            xmlns:fonticon="clr-namespace:FontAwesome"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:viewmodels="clr-namespace:MakeUpStoreApplication.ViewModels"
+             xmlns:model="clr-namespace:MakeUpStoreApplication.Common.Models"
+             x:DataType="viewmodels:ProductListingPageViewModel"
+             x:Class="MakeUpStoreApplication.Views.ProductListingPage"
+            >
+    <ContentPage.Resources>
+       
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout >
+           
+                <ScrollView Orientation="Horizontal">
+                
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                      
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                       
+                    </Grid.ColumnDefinitions>
+
+
+                    <Frame  BorderColor="DodgerBlue" Margin="0" 
+                        HasShadow="True" BackgroundColor="#e9e9e9"
+                        
+                        Padding="0" Grid.Column="0">
+                        <StackLayout Orientation="Horizontal">
+
+
+                            <Picker  HorizontalTextAlignment="Center"
+                       Title="Brands"
+                        TitleColor="#1f1f1f" FontSize="Medium"
+                        ItemsSource="{Binding BrandFilterCollection}"
+                            ItemDisplayBinding="{Binding}"
+                            FontAttributes="Bold"
+                            SelectedItem="{Binding BrandFilter}"  >
+
+                            </Picker>
+
+                            <Label VerticalOptions="CenterAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static fonticon:FontAwesomeIcons.Sort}"
+                                       FontFamily="FAS"  FontSize="20"
+                                              TextColor="DodgerBlue" 
+                                       />
+
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                            </Label>
+
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame  BorderColor="DodgerBlue" Margin="0" 
+                        HasShadow="True" BackgroundColor="#e9e9e9"
+                        
+                        Padding="0" Grid.Column="1">
+                        <StackLayout Orientation="Horizontal">
+
+
+                            <Picker  HorizontalTextAlignment="Center"
+                       Title="Product Type"
+                        TitleColor="#1f1f1f" FontSize="Medium"
+                        ItemsSource="{Binding ProductTypeFilterCollection}"
+                            ItemDisplayBinding="{Binding}"
+                            FontAttributes="Bold"
+                            SelectedItem="{Binding ProductTypeFilter}"  >
+
+                            </Picker>
+
+                            <Label VerticalOptions="CenterAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static fonticon:FontAwesomeIcons.Sort}"
+                                       FontFamily="FAS"  FontSize="20"
+                                              TextColor="DodgerBlue" 
+                                       />
+
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                            </Label>
+
+
+                        </StackLayout>
+
+                    </Frame>
+
+
+                    <Frame  BorderColor="DodgerBlue" Margin="0" 
+                        HasShadow="True" BackgroundColor="#e9e9e9"
+                        
+                        Padding="0" Grid.Column="2">
+                        <StackLayout Orientation="Horizontal">
+
+
+                        <Picker  HorizontalTextAlignment="Center"
+                       Title="Price"
+                        TitleColor="#1f1f1f" FontSize="Medium"
+                        ItemsSource="{Binding PriceFilterCollection}"
+                            ItemDisplayBinding="{Binding RangeInfo}"
+                            FontAttributes="Bold"
+                            SelectedItem="{Binding FilteredPrice}"  >
+                                
+                         </Picker>
+
+                         <Label VerticalOptions="CenterAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static fonticon:FontAwesomeIcons.Sort}"
+                                       FontFamily="FAS"  FontSize="20"
+                                              TextColor="DodgerBlue" 
+                                       />
+                                        
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                         </Label>
+
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame  BorderColor="DodgerBlue" Margin="0" 
+                        HasShadow="True" BackgroundColor="#e9e9e9"
+                        
+                        Padding="0" Grid.Column="3">
+                        <StackLayout Orientation="Horizontal">
+
+
+                            <Picker  HorizontalTextAlignment="Center"
+                       Title="Customer Reviews"
+                        TitleColor="#1f1f1f" FontSize="Medium"
+                        ItemsSource="{Binding RatingsFilterCollection}"
+                            ItemDisplayBinding="{Binding RatingInfo}"
+                            FontAttributes="Bold"
+                            SelectedItem="{Binding RatingFilter}"  >
+
+                            </Picker>
+
+                            <Label VerticalOptions="CenterAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static fonticon:FontAwesomeIcons.Sort}"
+                                       FontFamily="FAS"  FontSize="20"
+                                              TextColor="DodgerBlue" 
+                                       />
+
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                            </Label>
+
+
+                        </StackLayout>
+
+                    </Frame>
+
+
+
+                    <Button Text="Save Changes" 
+                                Grid.Column="4" 
+                                BackgroundColor="DodgerBlue"
+                                TextColor="White"
+                                Padding="0" Margin="0"
+                                Command="{Binding SaveFilterCommand}"/>
+                   
+                </Grid>
+                    
+            </ScrollView>
+            
+                <CollectionView x:Name="productList" ItemsSource="{Binding ProductCollection}"
+                              
+                ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding ProductSelected}"
+                                SelectionChangedCommand="{Binding ProductSelectedCommand}"
+                               >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:Name="dataModel" x:DataType="model:MakeUp">
+                        <StackLayout x:Name="datamodel" >
+                        <Frame BorderColor="DodgerBlue" Margin="5">
+                            
+                        
+                        <Grid  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                      
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                            
+                            <ffimageloading:CachedImage  LoadingPlaceholder="makeup.png"
+                                                         Grid.Row="0" Grid.ColumnSpan="2"
+                                                           Source="{Binding  ImageLink}"
+                                                           Aspect="AspectFill" HeightRequest="150"  />
+                                    <Label Grid.Row="1"  Grid.ColumnSpan="2"
+                                        Text="{Binding Name}"
+                                        FontAttributes="Bold"
+                                         LineBreakMode="WordWrap" HeightRequest="50" />
+
+                                    <Label Grid.Row="2" Grid.Column="0"
+                       FontAttributes="Italic"
+                             
+                              FontSize="Large"
+                       VerticalOptions="End"  >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Rating}" TextColor="Black"  FontSize="20"/>
+                                                <Span Text="{x:Static fonticon:FontAwesomeIcons.Star }" TextColor="Gold" FontFamily="FAS" FontSize="Large" />
+                                               
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label Grid.Row="2" Grid.Column="1"
+                       FontAttributes="Italic"
+                             
+                              FontSize="Large"
+                       VerticalOptions="EndAndExpand"  >
+                                <Label.FormattedText>
+                                    <FormattedString>
+
+                                                <Span Text="{x:Static fonticon:FontAwesomeIcons.DollarSign }" TextColor="Black" FontFamily="FAS" FontSize="Large" />
+                                                <Span Text="{Binding Price,StringFormat='{0}' }" TextColor="Black"  />
+                                            </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                                    
+                                    <ImageButton  Grid.Row="3" BackgroundColor="Transparent" Grid.Column="1" Clicked="ProductList_SelectionChanged" 
+                                                  CommandParameter="{Binding Source={x:Reference Name=datamodel},Path=BindingContext}">
+                                        <ImageButton.Source>
+                                            <FontImageSource Glyph="{x:Static fonticon:FontAwesomeIcons.PlusCircle}"
+                                                             FontFamily="FAS"
+                                                             Color="Gold" 
+                                                             
+                                                             />
+                                        </ImageButton.Source>
+                                        
+                                    </ImageButton>
+                                </Grid>
+                        </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:App3._1"
+             x:Class="App3._1.MainPage">
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="ImageWithDetailTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="Aquamarine">
+                        <Grid.ColumnDefinitions  >
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.4*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding OneImage}" Grid.Column="0" WidthRequest="280" />
+                        <Label Text="{Binding Title}" TextColor="Black" FontAttributes="Bold"  HorizontalOptions="Center"  Grid.Column="1"/>
+                        <Label Text="{Binding Description}" TextColor="Green" FontAttributes="Bold"  Grid.Column="2" />
+
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="LargeImageTemplate">
+                <ViewCell>
+                    <Image   Source="{Binding OneImage}" Aspect="Fill"  />
+                </ViewCell>
+            </DataTemplate>
+            <local:ImageDataTemplateSelector x:Key="imageSelector" ImageWithDetailTemplate="{StaticResource ImageWithDetailTemplate}"
+                                             LargeImageTemplate="{StaticResource LargeImageTemplate}" />
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Margin="20">
+        <Label Text="ListView with a Image" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Grid>
+            <Grid.ColumnDefinitions  >
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.4*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Image" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Title" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Center" />
+            <Label Text="Description" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Center" />
+
+        </Grid>
+        
+        <ListView x:Name="listView" Margin="0,20,0,0"   ItemTemplate="{StaticResource imageSelector}" >
+
+        </ListView>
+
+      
+
+
+    </StackLayout>
+
+</ContentPage>

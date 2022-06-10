@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+              xmlns:fontawesome="clr-namespace:FontAwesome"
+              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:models="clr-namespace:NewsApp.Common.Models"
+             xmlns:viewmodels="clr-namespace:NewsApp.ViewModels" 
+             
+             x:DataType="viewmodels:FavoriteArticlePageViewModel"
+             
+             x:Class="NewsApp.Views.FavoriteArticlePage">
+    <StackLayout>
+        <ListView ItemsSource="{Binding ArticleCollection}" SelectedItem="{Binding SelectedArticle}" HasUnevenRows="True" 
+                  CachingStrategy="RecycleElement"
+                  BackgroundColor="LightGray" >
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ListItemSelectedCommand}"  />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Article">
+                    <ViewCell >
+                        <Frame BorderColor="DodgerBlue" IsClippedToBounds="True" HasShadow="True" Margin="10"  >
+
+                            <Grid Margin="0" Padding="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="5*" />
+
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage LoadingPlaceholder="placeholder2.png" Source="{Binding UrlToImage}" Aspect="AspectFill" Margin="0" Grid.RowSpan="2" />
+                                <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Title" TextColor="Black" LineBreakMode="WordWrap" >
+
+                                </Label>
+
+
+
+                                <Label VerticalOptions="EndAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static fontawesome:FontAwesomeIcons.Clock}"
+                                       FontFamily="FAR"  
+                                       />
+                                            <Span Text="{Binding PublishedAt,StringFormat='  {0:hh:mm tt}'}"  TextColor="Black" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

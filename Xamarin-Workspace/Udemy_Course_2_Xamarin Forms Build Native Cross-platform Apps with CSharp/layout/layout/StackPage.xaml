@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.StackPage"
+           
+             Padding="0,20,0,0">
+
+    <StackLayout Orientation="Horizontal"  Spacing="10"  BackgroundColor="Black"  HeightRequest="100"  HorizontalOptions="Center" VerticalOptions="StartAndExpand"  >
+
+        <StackLayout Orientation="Vertical" >
+            <Image Source="https://aka.ms/campus.jpg" HeightRequest="60"  />
+            <Label Text="Microsoft " TextColor="White"  FontSize="Medium"/>
+        </StackLayout>
+      
+        <Label Text="Name " TextColor="White" FontSize="Medium"/>
+        <Label Text="Title "   TextColor="White"  FontSize="Medium"/>
+        <Label Text="Description "   TextColor="White"  FontSize="Medium" />
+            
+    </StackLayout>
+    
+
+</ContentPage>

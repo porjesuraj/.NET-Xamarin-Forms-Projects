@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"         
+             x:Class="PrismDemo1.Dialogs.PopUpDialog" 
+             BackgroundColor="White" 
+             
+      prism:DialogLayout.LayoutBounds="0.5,0.5,-1,-1" 
+       prism:DialogLayout.MaskStyle="{StaticResource FooStyle}"
+      prism:DialogLayout.CloseOnBackgroundTapped="True" 
+      
+      
+             >
+    <prism:DialogLayout.Mask>
+        <Image Source="world.jpg"  Aspect="AspectFill"
+               Opacity="1" />
+    </prism:DialogLayout.Mask>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <BoxView  MinimumHeightRequest="10" 
+           
+           MinimumWidthRequest="10"  BackgroundColor="#1530AD"  /> 
+   
+
+    <StackLayout Orientation="Vertical" Grid.Row="1">
+
+
+        <Label Text="{Binding Message}" HorizontalTextAlignment="Center" FontSize="Body"   TextColor="Black"/>
+        <Label Text="{Binding Detail}"   TextColor="Black"/>
+    </StackLayout>
+    <Button Text="Close"  Command="{Binding CloseCommand}"   Grid.Row="2"/>
+</Grid>

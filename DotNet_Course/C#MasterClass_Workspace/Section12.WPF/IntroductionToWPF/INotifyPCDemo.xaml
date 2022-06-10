@@ -1,0 +1,23 @@
+﻿<Page x:Class="IntroductionToWPF.INotifyPCDemo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IntroductionToWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="INotifyPCDemo">
+
+    <StackPanel>
+        <Label Content="Addition of two numbers" HorizontalAlignment="Center" 
+               FontStyle="Normal" FontWeight="Bold" FontSize="50"/>
+        <Label Content="Num1" />
+        <TextBox Width="100" Height="30" Text="{Binding Path=Num1, Mode=TwoWay}" />
+        <Label Content="Num2" />
+
+        <TextBox Width="100" Height="30" Text="{Binding Path=Num2, Mode=TwoWay}" />
+        <Label Content="Result" />
+        <TextBox Width="100" Height="30" Text="{Binding Path=Result, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+    </StackPanel>
+</Page>

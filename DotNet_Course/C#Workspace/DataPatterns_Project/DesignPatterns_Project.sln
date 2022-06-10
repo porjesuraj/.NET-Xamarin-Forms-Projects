@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton_Pattern", "Singleton_Pattern\Singleton_Pattern.csproj", "{51CD75BE-BA74-4EDD-A803-BBF189E16960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonDemo_Web", "SingletonDemo_Web\SingletonDemo_Web.csproj", "{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SingletonDemo", "SingletonDemo", "{B2AF50E1-2425-4F01-B551-2140694C9455}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FactoryDPDemo", "FactoryDPDemo", "{93C5FEC9-3A41-49E4-836C-F132BC4294D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51CD75BE-BA74-4EDD-A803-BBF189E16960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51CD75BE-BA74-4EDD-A803-BBF189E16960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51CD75BE-BA74-4EDD-A803-BBF189E16960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51CD75BE-BA74-4EDD-A803-BBF189E16960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51CD75BE-BA74-4EDD-A803-BBF189E16960} = {B2AF50E1-2425-4F01-B551-2140694C9455}
+		{710F6A72-3FDA-455C-BCB0-ADCCAB656D4E} = {B2AF50E1-2425-4F01-B551-2140694C9455}
+		{C5394726-6E9D-4D6F-9A56-2C3EDE2E777D} = {B2AF50E1-2425-4F01-B551-2140694C9455}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1A3F672-3DD1-4A1E-82E5-4DB43278505E}
+	EndGlobalSection
+EndGlobal

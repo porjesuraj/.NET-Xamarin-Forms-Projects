@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             xmlns:prism="http://prismlibrary.com"       
+             xmlns:te="clr-namespace:ExpenseTrackingApp.Views"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ExpenseTrackingApp.Views.CategoriesPage">
+    <ContentPage.Resources>
+        <!--<StyleSheetExtension Source="/StyleSheets/styles.css" />-->
+        <ResourceDictionary>
+            <!--<StyleSheetExtension Source="StyleSheets/styles.css" />-->
+            
+            
+            <Style TargetType="Label" x:Key="visibleStyle"  >
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList >
+
+                        <VisualStateGroup x:Name="OrientationStates">
+                            <VisualState x:Name="Landscape">
+                                <VisualState.Setters>
+                                    <Setter Property="IsVisible" Value="false" />
+
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Portrait" >
+                                <VisualState.Setters>
+                                    <Setter Property="IsVisible" Value="true" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Button"  >
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Lime" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="FontSize" Value="36" />
+                                    <Setter Property="BackgroundColor" Value="Red" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Pink" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Export" Command="{Binding ExportCommand}"  />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout  >
+        <Label x:Name="catLabel" Text="{te:Translate Text=title}"
+               StyleClass="titleLabel"  HorizontalTextAlignment="Center"
+               FontSize="30" Style="{x:DynamicResource visibleStyle}">
+        </Label>
+
+        <Label x:Name="catLabel1" Text="Text"
+               StyleClass="titleLabel"  HorizontalTextAlignment="Center"
+               FontSize="30" Style="{StaticResource visibleStyle}">
+        </Label>
+
+        <Button  x:Name="stateButton" Pressed="stateButton_Pressed"
+                 Released="stateButton_Released"
+                 Text="Button with State" TextColor="DodgerBlue"
+                  
+                 >
+        </Button>
+
+        <ImageButton Source="money3.png"   Clicked="ImageButton_Clicked"    
+               HeightRequest="100"
+                     WidthRequest="100" BackgroundColor="White">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale" Value="0.8" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ImageButton>
+        
+        
+        <ListView ItemsSource="{Binding CategoryExpensesCollection}"  CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="16,0">
+                            <Label Text="{Binding Category}" />
+                            <ProgressBar  Progress="{Binding ExpensePercentage}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

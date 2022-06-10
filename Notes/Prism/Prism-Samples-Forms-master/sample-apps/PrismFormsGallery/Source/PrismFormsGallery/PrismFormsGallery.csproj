@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" />
+    <PackageReference Include="Prism.DryIoc.Forms" />
+    <PackageReference Include="Refractored.MvvmHelpers" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\CommandingModule\CommandingModule.csproj" />
+    <ProjectReference Include="..\Modules\EventsModule\EventsModule.csproj" />
+    <ProjectReference Include="..\Modules\NavigationModule\NavigationModule.csproj" />
+    <ProjectReference Include="..\Modules\DialogModule\DialogModule.csproj" />
+  </ItemGroup>
+
+</Project>

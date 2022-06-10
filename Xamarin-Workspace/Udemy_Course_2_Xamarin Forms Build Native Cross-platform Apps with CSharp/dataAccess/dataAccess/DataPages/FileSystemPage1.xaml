@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="dataAccess.DataPages.FileSystemPage1">
+    <StackLayout VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="FillAndExpand">
+
+        <Entry x:Name="txtText" Placeholder="Write here" />
+        <Button x:Name="btnWrite" Text="Write" />
+        <Button x:Name="btnRead" Text="Read" />
+
+        <Label x:Name="readText" HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap" Text="File Values: "  TextColor="#0e172f" FontSize="20"/>
+        
+    </StackLayout>
+</ContentPage>

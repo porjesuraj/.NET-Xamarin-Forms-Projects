@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:ic="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="navigation.Exercises.UserProfilePage">
+    <ContentPage.Content >
+        <StackLayout  BackgroundColor="Black" >
+
+            <Frame   BorderColor="Aqua"  VerticalOptions="FillAndExpand" Padding="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto" />
+
+                    </Grid.RowDefinitions>
+
+                    <ic:CircleImage Source="{Binding ImageUrl}" 
+                                            WidthRequest="30"
+                                            HeightRequest="30"
+                                            Aspect="AspectFill" Grid.Row="0" />
+                    <StackLayout   Grid.Row="1" BackgroundColor="#424242">
+
+                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="30"  HorizontalTextAlignment="Center" TextColor="WhiteSmoke" />
+
+
+                        <Label Text="{Binding Description}" TextColor="Wheat"  FontSize="25"  HorizontalTextAlignment="Center" />
+                    </StackLayout>
+
+                </Grid>
+            </Frame>
+
+
+
+
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

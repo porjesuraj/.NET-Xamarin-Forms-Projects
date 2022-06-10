@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PrismSample.Views.ViewA"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="ViewA"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <StackLayout>
+        <Button
+            Command="{prism:GoBack}"
+            HorizontalOptions="Center"
+            Style="{StaticResource DarkButton}"
+            Text="Main Page"
+            VerticalOptions="CenterAndExpand" />
+    </StackLayout>
+
+</ContentPage>

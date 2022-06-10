@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="2"
+    android:columnCount="2"
+    >
+     <TextView
+            android:text="Verical 1       "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textColor="#0f0"
+            android:id="@+id/textView2" 
+        android:layout_row="0"
+        android:layout_column="0"
+        />
+        <TextView
+            android:text="Verical 2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textColor="#0ff0ff"
+            android:id="@+id/textView1"
+          android:layout_row="0"
+        android:layout_column="1"
+         />
+     <TextView
+            android:text="Verical 3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textColor="#0f0"
+          android:layout_row="1"
+        android:layout_column="0"
+            android:id="@+id/textView3" />
+        <TextView
+            android:text="Verical 4"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textColor="#0ff0ff"
+          android:layout_row="1"
+        android:layout_column="1"
+            android:id="@+id/textView4" />
+
+
+</GridLayout>

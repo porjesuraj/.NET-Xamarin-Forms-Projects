@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.MainPage">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="#2196F3" />
+           
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout  Spacing="2" >
+        <Frame BackgroundColor="Aquamarine"  Padding="0" CornerRadius="0">
+            <Label Text="Layouts"  HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+      
+            <Button Text="StackPage" Clicked="Button_Clicked"  />
+       
+     
+            <Button Text="StackPage Exercise 1" Clicked="Button_Clicked_1"  />
+        
+        
+            <Button Text="StackPage Exercise 2" Clicked="Button_Clicked_2"  />
+       
+       
+            <Button Text="Grid Page" Clicked="Button_Clicked_3" />
+       
+       
+            <Button Text="Grid Page Exercise" Clicked="Button_Clicked_4"  />
+       
+
+       
+            <Button Text="Grid Page Exercise 2" Clicked="Button_Clicked_5"  />
+        
+
+       
+            <Button Text="Absolute Page " Clicked="Button_Clicked_6"   />
+            
+            <Button Text="Absolute Page Exercise 1  " Clicked="Button_Clicked_7" />
+
+
+        <Button Text="Absolute Page Exercise 2  " Clicked="Button_Clicked_8" />
+        <Button Text="Relative Page   " Clicked="Button_Clicked_9" />
+        <Button Text="Relative Page Exercise  " Clicked="Button_Clicked_10" />
+
+    </StackLayout>
+
+</ContentPage>

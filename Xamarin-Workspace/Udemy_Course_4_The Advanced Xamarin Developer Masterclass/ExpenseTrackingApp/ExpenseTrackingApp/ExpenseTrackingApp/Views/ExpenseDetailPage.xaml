@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ExpenseTrackingApp.Views.ExpenseDetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label" x:Key="nameLabel">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="30" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="amountLabel">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="#05A8AA" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="dateLabel">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            
+            <Style TargetType="Label" x:Key="categoryLabel">
+                <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="TextColor" Value="#05A8AA" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Margin="16,16,16,0" >
+        <Label Text="{Binding Expense.Amount, StringFormat='{0:c}'}" Style="{StaticResource amountLabel}"  />
+        <Label Text="{Binding Expense.Name}"  Style="{StaticResource nameLabel}"  />
+        <StackLayout Orientation="Horizontal" >
+            <Label Text="{Binding Expense.Date,StringFormat='{0:MM/dd/yyyy}'}"  Style="{StaticResource dateLabel}" />
+            <Label Text="{Binding Expense.Category}"  Style="{StaticResource categoryLabel}" />
+            
+        </StackLayout>
+        <Label Text="{Binding Expense.Description}"   />
+    </StackLayout>
+</ContentPage>

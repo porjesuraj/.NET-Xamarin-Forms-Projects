@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.FormPages.FormPage1">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0">
+                <StackLayout Orientation="Horizontal"   Spacing="10"  >
+                    <Switch VerticalOptions="StartAndExpand"  x:Name="switch"  ThumbColor="#fa0543"  HorizontalOptions="StartAndExpand"/>
+                <Label  VerticalOptions="StartAndExpand"
+                    Text="Text is Visible" 
+                    IsVisible="{Binding Source={x:Reference switch},Path=IsToggled}"
+                    FontSize="30"   HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"/>
+            </StackLayout>
+            </Frame>
+            <Frame Grid.Row="1" >
+                <StackLayout Orientation="Horizontal"   >
+                <Slider x:Name="slider"   Maximum="120" Minimum="30"  HorizontalOptions="StartAndExpand" />
+           <Label Text="{Binding Source={x:Reference slider}, Path=Value,StringFormat='{0:N0}'}"
+                  
+                  HorizontalTextAlignment="Center"
+                    FontSize="{Binding Source={x:Reference slider}, Path=Value}"
+                    FontAttributes="Bold"
+                  />
+            </StackLayout>
+            </Frame>
+            <Frame Grid.Row="2">
+                <StackLayout Orientation="Horizontal"  Spacing="10"  >
+
+                    <Stepper x:Name="stepper" Maximum="120" Minimum="6" Increment="6"  HorizontalOptions="StartAndExpand"  />
+
+                    <Label Text="{Binding Source={x:Reference stepper}, Path=Value,StringFormat='{0:N0}'}"
+                    HorizontalTextAlignment="Center"
+                  
+                    FontSize="{Binding Source={x:Reference stepper}, Path=Value}"
+                    FontAttributes="Bold"
+                  />
+
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Row="3">
+                <StackLayout  >
+                    <Entry Keyboard="Email" TextChanged="Entry_TextChanged" Placeholder="Enter Email" />
+                    <Entry IsPassword="True" Completed="Entry_Completed" Placeholder="Enter Password" />
+                   
+                    <Label x:Name="elabel" FontSize="20"  />
+                    <Label x:Name="plabel" FontSize="20"  />
+                    
+
+
+
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="4">
+                <StackLayout BackgroundColor="#ccac60" Padding="10" >
+                    <Editor VerticalOptions="FillAndExpand" 
+                            Placeholder="Editor To Capture multiple line of code..."
+                            PlaceholderColor="WhiteSmoke"
+                            TextColor="White" BackgroundColor="Black" />
+
+
+
+                </StackLayout>
+            </Frame>
+
+
+
+        </Grid>
+        
+       
+    </ContentPage.Content>
+</ContentPage>

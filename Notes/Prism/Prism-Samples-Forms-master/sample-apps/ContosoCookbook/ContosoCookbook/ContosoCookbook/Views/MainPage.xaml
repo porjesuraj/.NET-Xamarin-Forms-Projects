@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            xmlns:converters="using:ContosoCookbook.Converters"
+            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+            ios:Page.UseSafeArea="true"
+            ItemsSource="{Binding RecipeGroups}"
+            Title="Contoso Cookbook"
+            x:Name="mainPage"
+            x:Class="ContosoCookbook.Views.MainPage">
+
+  <TabbedPage.Resources>
+    <ResourceDictionary>
+      <prism:ContainerProvider x:TypeArguments="converters:LocalImagePathConverter" x:Key="LocalImagePathConverter" />
+    </ResourceDictionary>
+  </TabbedPage.Resources>
+  
+  <TabbedPage.ItemTemplate>
+    <DataTemplate>
+      <ContentPage Title="{Binding Title}">
+        <ListView ItemsSource="{Binding Recipes}"
+                  RowHeight="{OnPlatform UWP=144, Android=136, iOS=128}">
+                    <ListView.Behaviors>
+                        <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              EventArgsParameterPath="Item"
+                                              Command="{Binding BindingContext.RecipeSelectedCommand,Source={x:Reference mainPage}}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <Grid Padding="8">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{OnPlatform UWP=144, Android=144, iOS=120}" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Image Source="{Binding ImagePath, Converter={StaticResource LocalImagePathConverter}}" />
+                  <Grid Grid.Column="1"
+                        Padding="{OnPlatform UWP='12,-2,0,-4', Android='8,2,0,4', iOS='4,8,0,8'}">
+                    <Label Text="{Binding Subtitle}" FontSize="Large" LineBreakMode="WordWrap" />
+                  </Grid>
+                </Grid>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </ContentPage>
+    </DataTemplate>
+  </TabbedPage.ItemTemplate>
+
+</TabbedPage>
+

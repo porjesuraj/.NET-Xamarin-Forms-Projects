@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309795389098",
+    "project_id": "newsappproject-e4790",
+    "storage_bucket": "newsappproject-e4790.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309795389098:android:f9052522be18f8faf39ad3",
+        "android_client_info": {
+          "package_name": "com.cybage.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309795389098-d5ab2vvnh24b3dd3h974vdveqk91oiak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3SWw7c2V_rWJX-2gR5KuhKUbZAv442DE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309795389098-d5ab2vvnh24b3dd3h974vdveqk91oiak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

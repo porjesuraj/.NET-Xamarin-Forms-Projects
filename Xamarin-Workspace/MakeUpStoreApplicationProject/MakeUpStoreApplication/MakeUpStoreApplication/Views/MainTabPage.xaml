@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            
+            xmlns:views="clr-namespace:MakeUpStoreApplication.Views"
+            xmlns:fonticons="clr-namespace:FontAwesome"
+            xmlns:droid="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            droid:TabbedPage.ToolbarPlacement="Bottom"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            x:Class="MakeUpStoreApplication.Views.MainTabPage">
+    <NavigationPage.TitleView >
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Make Up Store" TextColor="White"
+                   FontSize="Title"
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+           
+
+            <Grid RowDefinitions="3*,*"  VerticalOptions="EndAndExpand">
+                <Label Grid.Row="0" Text="{Binding CartNumber}"
+                       FontAttributes="Bold"
+                       FontSize="25"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Start"
+                       TextColor="White"  BackgroundColor="Transparent" />
+                <ImageButton VerticalOptions="EndAndExpand"
+                             HorizontalOptions="End"
+                             Grid.RowSpan="2" HeightRequest="30" BackgroundColor="Transparent" Command="{Binding GotoCartCommand}" Source="cart.png" >
+
+                </ImageButton>
+            </Grid>
+          
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <TabbedPage.Children>
+
+
+        <views:HomePage IconImageSource="home.png"  HeightRequest="40" Title="Home " />
+    <views:ProductListingPage IconImageSource="products.png" HeightRequest="40" Title="Product" />
+        <views:ProfilePage IconImageSource="profile.png"  HeightRequest="40" Title="Profile "/>
+    </TabbedPage.Children>
+</TabbedPage>

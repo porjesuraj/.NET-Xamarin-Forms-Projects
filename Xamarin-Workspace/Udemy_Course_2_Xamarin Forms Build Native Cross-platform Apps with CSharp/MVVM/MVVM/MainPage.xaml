@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVVM.MainPage" 
+             Title="MVVM Demos">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="BackgroundColor" Value="#E63427" />
+
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame   BackgroundColor="White">
+        <StackLayout  Spacing="5" Padding="5" Margin="70">
+
+
+
+
+
+            <Button Text=" using ViewModel  " Clicked="Button_Clicked"  />
+         
+
+        </StackLayout>
+    </Frame>
+</ContentPage>

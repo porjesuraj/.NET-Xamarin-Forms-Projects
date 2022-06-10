@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="list.listPages.listExercise">
+    <StackLayout>
+
+        <SearchBar Placeholder="location ..." PlaceholderColor="LawnGreen" TextChanged="SearchBar_TextChanged"  />
+
+        <ListView x:Name="lists"  HasUnevenRows="True"   SeparatorVisibility="Default" SeparatorColor="#00ff71"
+                  IsPullToRefreshEnabled="True"  Refreshing="lists_Refreshing"
+                  >
+
+            <!--IsGroupingEnabled="True" 
+                  GroupDisplayBinding="{Binding Title}"
+                  GroupShortNameBinding="{Binding ShortTitle}"-->
+                  
+
+            <ListView.ItemTemplate>
+                <DataTemplate >
+
+                    <ViewCell >
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Call" Clicked="MenuItem_Called" CommandParameter="{Binding .}" />
+                            <MenuItem Text="Delete" Clicked="MenuItem_Deleted" CommandParameter="{Binding .}" IsDestructive="True" />
+                            
+                        </ViewCell.ContextActions>
+
+                        <StackLayout Orientation="Horizontal"  BackgroundColor="#2a2c33" >
+                            <Image Source="{Binding ImageUrl}" Aspect="AspectFill"  />
+
+                            <StackLayout >
+                                <Label Text="{Binding Location}" HorizontalOptions="Start" TextColor="White" />
+                                <Label  TextColor="White">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0:MMM dd, yyyy} - {1:MMM dd, yyyy}">
+                                            <Binding Path="CheckIn" />
+                                            <Binding Path="CheckOut" />
+
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </StackLayout>
+
+                        </StackLayout>
+                        
+                        
+                       
+                        
+                    </ViewCell>
+                    
+                </DataTemplate>
+                
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </StackLayout>
+</ContentPage>

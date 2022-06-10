@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.StackExercise2">
+    <StackLayout HorizontalOptions="Fill" Padding="0" Margin="0"  Spacing="0">
+        <Label Text="nature_photographer" TextColor="Black"   FontSize="20" HorizontalTextAlignment="Start"    Padding="10" Margin="0"/>
+        <Image Source="https://newevolutiondesigns.com/images/freebies/nature-hd-background-22.jpg" HeightRequest="265"  Margin="0" />
+
+        <StackLayout Orientation="Horizontal" Spacing="10" Padding="10">
+            <Label Text="Like" TextColor="DodgerBlue" FontSize="18" />
+            <Label Text="Comment" TextColor="DodgerBlue"  FontSize="18" />
+            <Label Text="Share" TextColor="DodgerBlue"  FontSize="18" />
+        </StackLayout>
+
+        <BoxView HeightRequest="1" Color="#f0f0f0" />
+
+        <StackLayout Orientation="Vertical" Padding="10">
+            
+       
+
+        <Label Text="700 Likes" TextColor="Black"   FontSize="20" FontAttributes="Bold" />
+
+        <Label Text="This design is similar to Instagram app. You can see that a few elements are
+stacked vertically"   FontSize="18"  />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

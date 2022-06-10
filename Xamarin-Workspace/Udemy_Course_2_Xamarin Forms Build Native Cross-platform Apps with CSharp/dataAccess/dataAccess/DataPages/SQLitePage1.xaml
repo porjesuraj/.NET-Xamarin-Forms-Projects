@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="dataAccess.DataPages.SQLitePage1">
+
+    <StackLayout Orientation="Vertical" >
+
+
+        <StackLayout Orientation="Horizontal" Spacing="60" BackgroundColor="Black" >
+            <Button Text="Add" TextColor="#41F700"  Clicked="OnAdd"  Padding="5" BackgroundColor="Black" />
+            <Button Text="Update" TextColor="Aqua" Clicked="OnUpdate" BackgroundColor="Black"  />
+            <Button Text="Delete" TextColor="#F73A00"  Clicked="OnDelete" BackgroundColor="Black" />
+        </StackLayout>
+
+        <ListView x:Name="recipeList" />
+    </StackLayout>
+     
+            
+     
+        
+        
+  
+</ContentPage>

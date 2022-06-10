@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="list.listPages.listPage1"
+             Title="Simple List ">
+    <ListView x:Name="listview" SeparatorColor="DarkOrchid"
+              IsVisible="true" 
+              >
+        <!--<ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding names}" TextColor="Black" />
+            </DataTemplate>
+        </ListView.ItemTemplate>-->
+        
+    </ListView>
+             
+</ContentPage>

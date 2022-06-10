@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.MainPage"
+             Title="Slider Binding page" BackgroundColor="Black">
+
+    <StackLayout BackgroundColor="White" Margin="10,5,10,0">
+        <Entry x:Name="text" VerticalOptions="StartAndExpand" Margin="20" />
+        <Label Text="{Binding Source={x:Reference text},Path=Text}" TextColor="CornflowerBlue"   
+               BindingContext="{x:Reference Name=slider}"
+               Rotation="{Binding Path=Value}"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="Header"
+             
+               />
+
+        <Slider x:Name="slider"  
+                Minimum="0"
+                Maximum="360"
+                VerticalOptions="CenterAndExpand"
+                ThumbColor="Blue"
+                MinimumTrackColor="Aqua"
+                MaximumTrackColor="Black"
+                />
+
+        <Label BindingContext="{x:Reference slider}"
+               Text="{Binding Value, StringFormat= 'the angle  is {0:F0} degrees'}" 
+               FontAttributes="Bold"
+               TextColor="Gray"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" 
+               FontSize="Large" />
+              
+
+    </StackLayout>
+   
+
+</ContentPage>

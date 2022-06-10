@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    iOS:Page.UseSafeArea="True"
+    
+    xmlns:todo="clr-namespace:TodoApp.ViewModels"
+    xmlns:convertor="clr-namespace:TodoApp.Convertors"
+    xmlns:context="clr-namespace:ContextMenu.Views;assembly=ContextMenu"
+             x:Class="TodoApp.Views.ToDoPage" 
+             Title="{Binding PageTitle}"
+             >
+    <!--<ContentPage.BindingContext>
+        <todo:ToDoPageViewModel />
+    </ContentPage.BindingContext>-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <convertor:BoolToColorConvertor x:Key="BoolToColor" />
+            <convertor:BoolToTextDecorationConvertor x:Key="BoolToTextDecor" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Item" Order="Primary" Priority="0"
+                     Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+
+           
+         <ListView x:Name="Todolist" ItemsSource="{Binding ToDoItemCollection}" 
+                      SelectedItem="{Binding SelectedItem}" 
+                      SeparatorVisibility="None" 
+                      BackgroundColor="White">
+                <ListView.Header>
+                    <StackLayout MinimumHeightRequest="100"
+                                 Padding="10">
+                        <ProgressBar 
+                            
+                            x:Name="listProgressBar"
+                          
+                                     ProgressColor="#FC0810"></ProgressBar>
+                        <Label Text="{Binding CompletedHeader}" TextColor="#1b1091" ></Label>
+                    </StackLayout>
+                </ListView.Header>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Complete" 
+                                          Command="{Binding Path=BindingContext.MarkAsCompletedCommand, Source={x:Reference pages}}"
+                                          CommandParameter="{Binding .}" 
+                                          />
+                            </ViewCell.ContextActions>
+                            <Frame CornerRadius="10"
+                                   HasShadow="True"
+                                   IsClippedToBounds="True"
+                                   Margin="3"
+                                   BackgroundColor="{Binding IsCompleted,Converter={StaticResource BoolToColor}}"
+                                   Padding="0" >
+                                <StackLayout Padding="10,5,0,0" 
+                                             Margin="8,5,8,5"
+                                             MinimumHeightRequest="100">
+                                    <Label Text="{Binding Name}"  TextColor="WhiteSmoke"
+                                       TextDecorations="{Binding IsCompleted,Converter={StaticResource BoolToTextDecor }}"/>
+
+
+
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
+
+
+
+
+
+
+<!--<ViewCell>
+    <ViewCell.ContextActions>
+        <MenuItem Text="Complete" 
+                                          Command="{Binding Path=BindingContext.MarkAsCompletedCommand, Source={x:Reference pages}}"
+                                          CommandParameter="{Binding .}" 
+                                          />
+    </ViewCell.ContextActions>
+    <Frame CornerRadius="10"
+                                   HasShadow="True"
+                                   IsClippedToBounds="True"
+                                   Margin="3"
+                                   BackgroundColor="{Binding IsCompleted,Converter={StaticResource BoolToColor}}"
+                                   Padding="0" >
+        <StackLayout Padding="10,5,0,0" 
+                                             Margin="8,5,8,5"
+                                             MinimumHeightRequest="100">
+            <Label Text="{Binding Name}"  TextColor="WhiteSmoke"
+                                       TextDecorations="{Binding IsCompleted,Converter={StaticResource BoolToTextDecor }}"/>
+
+
+
+        </StackLayout>
+    </Frame> 
+    </ViewCell>-->
+
+
+
+<!--<context:SideContextMenuView IsAutoCloseEnabled="true">
+    <context:SideContextMenuView.View>
+        <Frame CornerRadius="10"
+                                   HasShadow="True"
+                                   IsClippedToBounds="True"
+                                   Margin="3"
+                                   BackgroundColor="{Binding IsCompleted,Converter={StaticResource BoolToColor}}"
+                                                                     WidthRequest="{Binding Source={x:Reference Todolist}, Path=Width}" 
+                                   Padding="0" >
+            <StackLayout Padding="10,5,0,0" 
+                                             Margin="8,5,8,5"
+                                             MinimumHeightRequest="100">
+                <Label Text="{Binding Name}"  TextColor="WhiteSmoke"
+                                       TextDecorations="{Binding IsCompleted,Converter={StaticResource BoolToTextDecor }}"/>
+
+
+
+            </StackLayout>
+        </Frame>
+
+    </context:SideContextMenuView.View>
+    <context:SideContextMenuView.ContextTemplate>
+        <DataTemplate>
+            <Frame Margin="0, 5"
+                                       Padding="0"
+                                       CornerRadius="10"
+                                       IsClippedToBounds="true"
+                                       BackgroundColor="Gold">
+                <StackLayout 
+                                             Padding="10, 5"
+                                             Orientation="Horizontal"
+                                             Spacing="10"
+                                             Margin="0, 5">
+                    <Label Text="Delete" />
+                </StackLayout>
+            </Frame>
+        </DataTemplate>
+    </context:SideContextMenuView.ContextTemplate>
+    </context:SideContextMenuView> -->
+
+<!-- <context:SwipeActionContextHolder MovedCommand="{Binding Path=BindingContext.MarkAsCompletedCommand, Source={x:Reference pages}}">
+    <context:SwipeActionContextMenuView >
+        <context:SwipeActionContextMenuView.View>
+            <Frame CornerRadius="10"
+                                   HasShadow="True"
+                                   IsClippedToBounds="True"
+                                   Margin="3"
+                                   BackgroundColor="{Binding IsCompleted,Converter={StaticResource BoolToColor}}"
+                                                                     WidthRequest="{Binding Source={x:Reference Todolist}, Path=Width}" 
+                                   Padding="0" >
+                <StackLayout Padding="10,5,0,0" 
+                                             Margin="8,5,8,5"
+                                             MinimumHeightRequest="100">
+                    <Label Text="{Binding Name}"  TextColor="WhiteSmoke"
+                                       TextDecorations="{Binding IsCompleted,Converter={StaticResource BoolToTextDecor }}"/>
+
+
+
+                </StackLayout>
+            </Frame>
+        </context:SwipeActionContextMenuView.View>
+        <context:SwipeActionContextMenuView.ContextTemplate>
+            <DataTemplate>
+                <Label Text="MOVE TO DELETE" />
+
+            </DataTemplate>
+        </context:SwipeActionContextMenuView.ContextTemplate>
+    </context:SwipeActionContextMenuView>
+    </context:SwipeActionContextHolder>
+    -->

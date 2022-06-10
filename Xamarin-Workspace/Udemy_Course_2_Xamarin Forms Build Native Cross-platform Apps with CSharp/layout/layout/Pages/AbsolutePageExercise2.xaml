@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="layout.Pages.AbsolutePageExercise2">
+
+    <AbsoluteLayout >
+
+        <Image Source= "https://spliffmobile.com/download/pink-flowers-1333.jpg" Aspect="Fill"  />
+
+        <Label Text="Relax" TextColor="White" FontSize="35" 
+                HorizontalTextAlignment="Center" 
+                AbsoluteLayout.LayoutBounds="0,0.5,1,1" 
+                AbsoluteLayout.LayoutFlags="All" />
+
+        <BoxView Opacity="0.5"   HeightRequest="100" BackgroundColor="Black"
+                 AbsoluteLayout.LayoutBounds="0,1,1,100" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" />
+
+        <StackLayout Orientation="Horizontal"
+                     Spacing="10"
+                     HeightRequest="100" Padding="30,0"
+                      AbsoluteLayout.LayoutBounds="0,1,1,100" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" 
+                     >
+            <Label FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"
+                   Text="Profile" />
+            <Label FontSize="20" TextColor="White" HorizontalOptions="CenterAndExpand"  VerticalOptions="Center"
+                   Text="Meditate" />
+            <Label FontSize="20" TextColor="White" HorizontalOptions="Center"  VerticalOptions="Center"
+                   Text="Themes" />
+
+        </StackLayout>
+
+    </AbsoluteLayout>
+</ContentPage>

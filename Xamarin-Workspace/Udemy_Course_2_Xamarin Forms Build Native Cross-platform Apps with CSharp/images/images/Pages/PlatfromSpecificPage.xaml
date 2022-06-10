@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ic="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="images.Pages.PlatfromSpecificPage" 
+              Title="Platform specific">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="using XAML" HorizontalOptions="Center" />
+            <Button ImageSource="clock.png" HorizontalOptions="Center" 
+                    VerticalOptions="Center"/>
+
+
+
+            <Label Text="using XAML platform specifics" HorizontalOptions="Center" />
+
+            <Button x:Name="btn" HorizontalOptions="Center" 
+                    VerticalOptions="Center">
+                <Button.ImageSource>
+
+                    <OnPlatform x:TypeArguments="FileImageSource" >
+
+                        <On Platform="Android" Value="clock.png"  />
+                        <On Platform="iOS" Value="clock.png" />
+                        
+                    </OnPlatform>
+                              
+                </Button.ImageSource> 
+                
+            </Button>
+
+            <Label Text="using Image circle plugin" HorizontalOptions="Center" />
+
+            <ic:CircleImage WidthRequest="200"
+                            HeightRequest="200"
+                            Aspect="AspectFill"
+                            Source="dog.jfif"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+            <Label Text="use Device Independent Units to Set size, as it renders more or less same size on all devices, 160 units = 1 inch" HorizontalOptions="Center" />
+
+            <BoxView Color="Aqua" WidthRequest="160" HeightRequest="160" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamlNavigation.Views.ProfilePage">
+    <StackLayout HorizontalOptions="CenterAndExpand" Margin="20,40,20,0">
+        <Label Text="{Binding PostCountLabel}" FontSize="Medium" FontAttributes="Bold"  TextColor="DodgerBlue" HorizontalOptions="Center"/>
+        <Label Text="Post" FontSize="Medium"   TextColor="LightGray"  HorizontalOptions="Center"/>
+
+        <ListView ItemsSource="{Binding PostListSource}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Path=Key}" 
+                             Detail="{Binding Path=Value}"  TextColor="White" DetailColor="White"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </StackLayout>
+</ContentPage>

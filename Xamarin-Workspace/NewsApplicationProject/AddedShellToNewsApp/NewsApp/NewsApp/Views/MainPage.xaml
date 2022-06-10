@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="page" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:vm="clr-namespace:NewsApp.ViewModels" 
+             
+             ios:Page.UseSafeArea="True"  
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+            xmlns:behaviors="clr-namespace:NewsApp.Common.Behaviors"
+             xmlns:models="clr-namespace:NewsApp.Common.Models"
+             x:DataType="vm:MainPageViewModel"
+             
+             x:Class="NewsApp.Views.MainPage" 
+             
+              NavigationPage.BackButtonTitle="Back">
+
+   
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CompressedLayout.IsHeadless="True">
+       
+     
+        <SearchBar Text="{Binding SearchTerm}" Placeholder="Please Enter Search Term " SearchCommand="{Binding SearchArticleCommand}" />
+
+        <StackLayout >
+           
+            <CarouselView x:Name="headlineCarousel" ItemsSource="{Binding HeadlineCollection}" 
+                          CurrentItem="{Binding HeadlineArticle}"
+                       
+                       
+                          IndicatorView="indicatorView"
+                           
+                          RemainingItemsThreshold="0"
+                          RemainingItemsThresholdReachedCommand="{Binding LoadMoreHeadlineCommand}"
+                          
+                           >
+                
+                
+                <CarouselView.ItemTemplate>
+                
+                <DataTemplate x:DataType="models:Article" >
+                        <Frame BorderColor="Gray" IsClippedToBounds="True" Margin="15"  Padding="5">
+                            
+                       
+                        <Grid  HeightRequest="30">
+                            <Grid.RowDefinitions>
+                             
+                                <RowDefinition Height="*" />
+                               
+                                
+                            </Grid.RowDefinitions>
+                           <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                        Command="{Binding CarouselItemTapped,Source={x:Reference headlineCarousel}}" 
+                                        NumberOfTapsRequired="1"  />
+                            </Grid.GestureRecognizers>
+
+
+                            <ffimageloading:CachedImage Grid.Row="0" 
+                                                        LoadingPlaceholder="placeholder2.png"
+                                                        Source="{Binding UrlToImage}" Aspect="AspectFit" 
+                                           HorizontalOptions="FillAndExpand" 
+                                           VerticalOptions="FillAndExpand"  >
+                                    <ffimageloading:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />
+                                    </ffimageloading:CachedImage.GestureRecognizers>
+                            
+                            </ffimageloading:CachedImage>
+
+
+                                <Label Grid.Row="0" Text="{Binding Title}" 
+                                           FontSize="Title" 
+                                           FontAttributes="Bold"
+                                          TextColor="White" 
+                                           Opacity="0.8"
+                                           BackgroundColor="Black"
+                                            HorizontalOptions="FillAndExpand" 
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="Center"
+                                           LineBreakMode="WordWrap" >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                            </Grid>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                                                      NumberOfTapsRequired="2" />
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+
+                    </DataTemplate>
+                    
+                
+            </CarouselView.ItemTemplate>
+
+                <CarouselView.EmptyView>
+                    <ContentView>
+                        <StackLayout HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand">
+                            <Image Source="newsappicon.png" Aspect="AspectFill" />
+                        </StackLayout>
+                    </ContentView>
+                </CarouselView.EmptyView>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                          
+                           SelectedIndicatorColor="DarkGray"
+                           HorizontalOptions="Center" 
+                           MaximumVisible="5"
+                           IndicatorSize="8" 
+                           IndicatorColor="DodgerBlue" 
+                           IndicatorsShape="Circle"/>
+        </StackLayout>
+        
+        
+        
+        <ListView ItemsSource="{Binding ArticleCollection}" SelectedItem="{Binding SelectedArticle}"
+                  HasUnevenRows="True" 
+                  BackgroundColor="LightGray"
+                  CachingStrategy="RecycleElement"
+                   >
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ListItemSelectedCommand}"  />
+                <behaviors:InfiniteScroll LoadMoreCommand="{Binding LoadMoreCommand}" />
+
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Article">
+                    <ViewCell >
+                        <Frame BorderColor="DodgerBlue" IsClippedToBounds="True" HasShadow="True" Margin="10"  >
+                            
+                            <Grid Margin="0" Padding="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="5*" />
+                                    
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage LoadingPlaceholder="placeholder2.png" Source="{Binding UrlToImage}" Aspect="AspectFill" Margin="0" Grid.RowSpan="2" />
+                                <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Title" TextColor="Black" LineBreakMode="WordWrap" >
+                                    
+                                </Label>
+
+
+
+                                <Label VerticalOptions="EndAndExpand" Grid.Row="1"  Grid.Column="1" >
+
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static fontawesome:FontAwesomeIcons.Clock}"
+                                       FontFamily="FAR"  
+                                       />
+                                            <Span Text="{Binding PublishedAt,StringFormat='  {0:hh:mm tt}'}"  TextColor="Black" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                
+                                </Label>
+                            </Grid>  
+                        </Frame>
+                    </ViewCell>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+       
+
+
+    </StackLayout>
+   
+</ContentPage>

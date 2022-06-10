@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="images.MainPage" 
+             Title="Image Gallery">
+
+    <ContentPage.Resources>
+
+        <Style TargetType="Button" >
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="#2196F3" />
+
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout  Spacing="2" Padding="5">
+       
+
+        <Button Text="Image using URI with activity indicator " Clicked="Button_Clicked"  />
+        <Button Text="Embedded Image  " Clicked="Button_Clicked_1"  />
+        <Button Text="Platform Specific  " Clicked="Button_Clicked_2"  />
+        <Button Text="Image Exercise " Clicked="Button_Clicked_3"  />
+
+
+      
+    </StackLayout>
+
+</ContentPage>

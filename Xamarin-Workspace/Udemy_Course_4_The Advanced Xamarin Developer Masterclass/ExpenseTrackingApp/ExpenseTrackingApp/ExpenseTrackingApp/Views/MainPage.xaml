@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:viewmodels="clr-namespace:ExpenseTrackingApp.ViewModels"
+            xmlns:view="clr-namespace:ExpenseTrackingApp.Views"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+          android:TabbedPage.ToolbarPlacement="Bottom"
+         
+            x:DataType="viewmodels:MainPageViewModel"    
+            x:Class="ExpenseTrackingApp.Views.MainPage"
+             Title="Expense Tracker">
+
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="androidAccent">#e9f7f9</Color>
+            <Color x:Key="iOSAccent">#181919</Color>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+
+    <NavigationPage.TitleView >
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="FillAndExpand"
+                     Spacing="10" >
+            <Image  Source="expense.png"  />
+            <Label 
+                   VerticalOptions="Center"
+                   Text="Expense Tracker" 
+                FontSize="Medium" TextColor="{OnPlatform Android={StaticResource androidAccent}, iOS={StaticResource iOSAccent}, Default={StaticResource iOSAccent}}"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <view:CategoriesPage Title="Categories" IconImageSource="categories.png"  />
+    <view:ExpensesPage Title="Expenses" IconImageSource="expense.png" />
+
+</TabbedPage>

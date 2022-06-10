@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    NavigationPage.HasNavigationBar="False"
+    
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="navigation.Pages.IntroPage1"
+             Title="Page 2"
+     BackgroundColor="#424242">
+    <ContentPage.Content>
+        <Frame BackgroundColor="Black" >
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center" BackgroundColor="#424242">
+                <Label   TextColor="White" Text="Introduction" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                <Editor  TextColor="White" >
+                <Editor.Text>
+                    Xamarin Introduction Xamarin is a software company started in 2011. Microsoft recently acquired Xamarin in 2016. 
+                    Xamarin provides a wide range of tools to the developer that can be used for the development 
+                    of the cross-platform mobile application.
+                </Editor.Text>
+            </Editor>
+            <Button Text="Back" Clicked="Button_Clicked" />
+        </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

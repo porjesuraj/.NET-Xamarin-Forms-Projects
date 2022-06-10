@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <EditText 
+        android:layout_margin="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name of Package"
+        android:id="@+id/packageNameEditText" />
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1" />
+    <TextView
+        android:text="    Locate Package Origin"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locatePackageTextView" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+       class="com.google.android.gms.maps.MapFragment" 
+        android:id="@+id/mapFragment"/>
+   
+    <TextView
+        android:text="Locate Package Destination"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/destinationtextView" />
+
+     <fragment
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+       class="com.google.android.gms.maps.MapFragment" 
+        android:id="@+id/destinationMapFragment"/>
+    
+
+</LinearLayout>

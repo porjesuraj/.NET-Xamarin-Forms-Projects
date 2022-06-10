@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:behavoir="clr-namespace:ExpenseTrackingApp.Behaviors"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ExpenseTrackingApp.Views.ExpensesPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="add.png" Command="{prism:NavigateTo 'NewExpensePage'}" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout >
+        <ListView ItemsSource="{Binding Expenses}"  SelectedItem="{Binding SelectedExpense}">
+            <!--<ListView.Behaviors>
+                <behavoir:ListViewBehavior />
+            </ListView.Behaviors>-->
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemSelected"
+                                              Command="{Binding ItemSelectedCommand}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                             
+                              StyleId="detail-disclosure-button"
+                              
+                              Detail="{ Binding Category}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

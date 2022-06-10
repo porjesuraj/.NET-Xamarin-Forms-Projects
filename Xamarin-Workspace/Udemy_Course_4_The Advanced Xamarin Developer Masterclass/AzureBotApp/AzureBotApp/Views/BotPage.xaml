@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
+             x:Class="AzureBotApp.Views.BotPage">
+    <NavigationPage.TitleView>
+        <Label Text=" FAQ  Chat Bot " HorizontalTextAlignment="Center" FontAttributes="Bold" BackgroundColor="DodgerBlue" TextColor="White" FontSize="Large" />
+
+    </NavigationPage.TitleView>
+    <StackLayout BackgroundColor="Gray" >
+        <WebView x:Name="chatBot" Source="https://webchat.botframework.com/embed/XamrinBotHandle?s=3eAONPhg5S8.S3ytHXBkrpOnAkKhayx26CkqQ2dRLOyGXXWo1Ety7aQ"
+                      WidthRequest="200" HeightRequest="600"
+                        
+                     Margin="0,0,0,10" />
+
+
+
+    </StackLayout>
+</ContentPage>

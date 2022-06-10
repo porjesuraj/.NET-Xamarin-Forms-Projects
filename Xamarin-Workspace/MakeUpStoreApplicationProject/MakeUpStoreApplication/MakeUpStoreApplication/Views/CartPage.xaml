@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonticons="clr-namespace:FontAwesome" 
+             xmlns:viewmodels="clr-namespace:MakeUpStoreApplication.ViewModels" 
+             xmlns:model="clr-namespace:MakeUpStoreApplication.Common.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:DataType="viewmodels:CartPageViewModel"
+             x:Class="MakeUpStoreApplication.Views.CartPage"
+           
+            
+             Title="My Cart">
+    <ScrollView Orientation="Vertical"> 
+        
+   
+    <StackLayout  BackgroundColor="LightGray">
+
+       
+     
+        <CollectionView x:Name="cartView" ItemsSource="{Binding CartCollection}" SelectionMode="Single"
+                        SelectedItem="{Binding CartProduct}"
+                      >
+          
+           
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:MakeUpProduct">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Add More" BackgroundColor="LightGreen"
+                                          
+                                           Command="{Binding Path=BindingContext.UpdateCartCommand,Source={x:Reference Name=cartView}}"
+                                           CommandParameter="{Binding .}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource  Glyph="{x:Static fonticons:FontAwesomeIcons.CheckCircle}"
+                                                          FontFamily="FAS" Color="DodgerBlue"/>
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
+
+                                <SwipeItem Text="Delete Product" BackgroundColor="Yellow"
+                                           Command="{Binding Path=BindingContext.DeleteFromCartCommand,Source={x:Reference Name=cartView}}"
+                                           CommandParameter="{Binding .}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource  Glyph="{x:Static fonticons:FontAwesomeIcons.TimesCircle}"
+                                                          FontFamily="FAS" Color="Red"/>
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                  
+                    
+                        <Frame  BorderColor="Gray"   >
+                            <Grid RowDefinitions="*,*,*,*" 
+                          ColumnDefinitions="2*,2*"
+                          HeightRequest="200"
+                       x:Name="productGrid"
+                          >
+                                <ffimageLoading:CachedImage Source="{Binding ImageLink}" 
+                                                    Grid.RowSpan="2" Grid.Row="0" Grid.Column="1" 
+                                                    Aspect="AspectFill" Margin="5"/>
+                                <Label Text="{Binding Name}" 
+                               TextColor="Black"
+                                 FontAttributes="Bold"
+                               FontSize="Medium"
+                                       LineBreakMode="WordWrap"
+                               Grid.Row="0" Grid.Column="0" />
+                                <Label Text="{Binding Price,StringFormat='$ {0}'}"
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               Grid.Row="2" Grid.Column="0" />
+
+                                <Button Text="{Binding Quantity,StringFormat='Qty: {0}'}"
+                                FontAttributes="Bold" FontSize="Medium"
+                                Grid.Row="2" Grid.Column="1" />
+                             <StackLayout Orientation="Horizontal"  Grid.Row="3" Grid.ColumnSpan="1" >
+
+                                        <ImageButton x:DataType="{x:Null}"  Margin="0"
+                                                       Command="{Binding Source={x:Reference cartView}, Path=BindingContext.MinusButtonClickedCommand,Mode=TwoWay}"
+                                                       CommandParameter="{Binding Source={x:Reference Name=productGrid},Path=BindingContext}"
+                                                       BackgroundColor="Transparent">
+                                            <ImageButton.Source>
+                                                <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.MinusCircle}" FontFamily="FAS" 
+                                     Color="Gray" Size="40" />
+                                            </ImageButton.Source>
+                                        </ImageButton>
+                                        <Label x:Name="quantityLabel" Text="{Binding Quantity}" FontSize="30" Margin="5,0,5,0" VerticalOptions="Center"/>
+                                        <ImageButton 
+                                            x:DataType="{x:Null}"
+                                             Command="{Binding Source={x:Reference cartView}, Path=BindingContext.PlusButtonClickedCommand,Mode=TwoWay}"
+                                                       CommandParameter="{Binding Source={x:Reference Name=productGrid},Path=BindingContext}"
+                                            BackgroundColor="Transparent">
+                                            <ImageButton.Source>
+                                                <FontImageSource Glyph="{x:Static fonticons:FontAwesomeIcons.PlusCircle}" FontFamily="FAS" 
+                                     Color="Gold" Size="40" />
+                                            </ImageButton.Source>
+                                        </ImageButton>
+
+                                    </StackLayout>
+                                    <Label Text="{Binding TotalAmount,StringFormat='MRP. {0}'}"
+                                            Grid.Row="3" Grid.Column="1"
+                                           HorizontalTextAlignment="End"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                       TextColor="Red" />
+                                </Grid>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+              
+        </CollectionView>
+        
+
+        <StackLayout Orientation="Horizontal" 
+                     BackgroundColor="White"
+                      >
+            <Label Text="{Binding TotalAmount,StringFormat='$ {0:0.00}'}" 
+                    FontSize="Large"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand"/>
+            <Button Text="Place Order " TextColor="White"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="OrangeRed" Margin="0,0,5,0" 
+                    Command="{Binding PlaceOrderCommand}"/>
+
+            
+            
+        </StackLayout>
+        <Frame >
+            
+      
+        <xct:Expander  Margin="5">
+            <xct:Expander.Header>
+                        <Label  TextColor="DodgerBlue"
+                       FontAttributes="Bold">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="bill details " 
+                                          FontSize="Title" />
+                                    <Span Text="{x:Static fonticons:FontAwesomeIcons.CaretDown}"
+                                          FontFamily="FAS" FontSize="20" />
+                                </FormattedString>
+                            </Label.FormattedText>    
+                        </Label>
+                    </xct:Expander.Header>
+            <Grid RowDefinitions="*,*,*" 
+                  ColumnDefinitions="3*,3*">
+                <Label Text="Total Product " FontAttributes="Bold"
+                       FontSize="Medium"
+                       Grid.Row="0" Grid.Column="0"/>
+                <Label Text="{Binding ProductTotal,StringFormat='= {0}'}" 
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Grid.Row="0" Grid.Column="1"/>
+                <Label Text="Tax Applied (5%)" 
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="{Binding TaxTotal,StringFormat='= $ {0}'}" 
+                       Grid.Row="1" Grid.Column="1"
+                               FontAttributes="Bold"
+                       FontSize="Medium"/>
+                 <Label Text="Total Amount " 
+                        FontAttributes="Bold"
+                       FontSize="Medium"
+                       Grid.Row="2" Grid.Column="0"/>
+                 <Label Text="{Binding TotalAmount,StringFormat='= $ {0:0.00}'}" 
+                        FontAttributes="Bold"
+                       FontSize="Medium"
+                       Grid.Row="2" Grid.Column="1"/>    
+                
+
+                    </Grid>
+        </xct:Expander>
+        </Frame>
+
+    </StackLayout>
+    </ScrollView>
+</ContentPage>

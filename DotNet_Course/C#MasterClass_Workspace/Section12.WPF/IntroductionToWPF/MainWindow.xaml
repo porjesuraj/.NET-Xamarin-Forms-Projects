@@ -1,0 +1,30 @@
+﻿<Window x:Class="IntroductionToWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IntroductionToWPF"
+        mc:Ignorable="d"
+        Title="My First GUI" Height="450" Width="800">
+    <ScrollViewer >
+    <StackPanel Grid.Row="0">
+           
+            
+            <Button Content="Xaml Demo"  FontSize="30" Foreground="DodgerBlue" Margin="30" Click="GoToXamlDemo"/>
+            <Button Content="CodeBehind Demo" Click="GoToCodeBehindDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="StackPanel Demo"  Click="GoToStackpanelDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Routed Event Demo"  Click="GoToRoutedEventDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Grid Demo"  Click="GridDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Grid Exercise Demo"   Click="GoToGridExerciseDemo" FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Dependency properties Demo"  Click="GoToDependencyPropDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Data Binidng Demo"  Click="GoToDataBindingDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="INotifyPropertyChanged Interface Demo"  Click="GoToINotifyDemo" FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="ListBox Demo"  Click="GoToListBoxDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="ComboBox Demo"  Click="GoToComboBoxDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="CheckBox Demo"  Click="GoToCheckBoxDemo" FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="RadioButton Demo"  Click="GoToRadioButtonDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="Triggers Demo"  Click="GoToTriggersDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+            <Button Content="PasswordBox Demo"  Click="GoToPasswordBoxDemo"  FontSize="30" Foreground="DodgerBlue" Margin="30"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

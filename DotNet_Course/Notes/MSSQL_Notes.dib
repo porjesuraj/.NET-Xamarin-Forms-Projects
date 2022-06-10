@@ -1,0 +1,512 @@
+#!markdown
+
+ #  1. C# MS SQL Notes with Linq
+
+ ## 1. MS SQL Server Setup  
+ + download MS SQL Server setup from
+ > https://www.microsoft.com/en-in/sql-server/sql-server-downloads
+ + use CUstom installation
+ 
+ + Select New MS SQL StandAlone installation
+ 1. My Sql Instance Name 
+   > MSSQLSERVER
+ 2. use Mixed Authentication 
+ + Password : PorjeSuraj@12345
+
++ then Download SQL Server Management Studio (SSMS)
++ And install it . 
+
+3. Use Server Explorer in VS
+   + Select Data Connection and add your SSMS credentials 
+   + create a Database with a unique name 
+
+4. Connection String
+>Data Source=SURAJPOR;Initial Catalog=SurajTrainingDB;Persist Security Info=True;User ID=sa;Password=PorjeSuraj@12345
++ Config file  key for conn string :  SurajTrainingDBConnectionString
+
+## 2. Setting up and Adding DB table in WPF Project
+  + 
+  1. In Server Explorer, Set up the Data Connection to SQL Server
+  2. then to add database to the project  
+  + Select Data Source and add the database with table 
+  3. now use the connection string in project
+```c#
+        public MainWindow()
+        {
+            InitializeComponent();
+            string connectionString = ConfigurationManager.ConnectionStrings["WPF_ZooManager.Properties.Settings.SurajTrainingDBConnectionString"].ConnectionString;
+        }
+```
+
+## 3. Using Queries in Database
++ to get animal in a particular zoo
+```sql
+Select a.Name from Animal a inner join ZooAnimal za on a.Id = za.AnimalId where za.ZooId = 2
+```
+
+## 4. using System.Data.SqlClient Class to Access Database
++ setting up connection to DB
+```c#
+MainWindow()
+{
+            // setting up connection string for database connection
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["WPF_ZooManager.Properties.Settings.SurajTrainingDBConnectionString"].ConnectionString;
+
+            sqlConnection = new SqlConnection(connectionString);
+}
+```
++ running static query for getting all from Animal table
+
+```c#
+             try
+             {
+                string query = "Select * from Animal";
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable animalTable = new DataTable();
+
+                    sqlDataAdapter.Fill(animalTable);
+
+                    allAnimalList.DisplayMemberPath = "Name";
+                    allAnimalList.SelectedValuePath = "Id";
+
+                    allAnimalList.ItemsSource = animalTable.DefaultView;
+
+                }
+             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("error message : " + ex.Message);
+                
+            }
+            
+
+```
++ running parameterized query
+
+```c#
+ try
+            {
+                string query = "Select * from Animal a inner join ZooAnimal za on a.Id = za.AnimalId where za.ZooId = @Zooid";
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+
+
+                using(sqlDataAdapter)
+                {
+                    if (zooList.SelectedValue == null)
+                        return; 
+                    sqlCommand.Parameters.AddWithValue("@Zooid", zooList.SelectedValue);
+
+                    DataTable animalTable = new DataTable();
+
+                    sqlDataAdapter.Fill(animalTable);
+
+                    animalList.DisplayMemberPath = "Name";
+                    animalList.SelectedValuePath = "Id";
+
+                    animalList.ItemsSource = animalTable.DefaultView;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("error message : " + ex.Message);
+            }
+
+```
+
++ queries
+
+1. Insert 
+>   string query = "insert into  Animal values(@Animal)";
+2. Delete
+> string query = "delete from ZooAnimal where ZooId = @ZooId AND AnimalId = @AnimalId";
+3. Update
+> string query = "update  Animal Set Name= @Name where Id = @AnimalId";
+ 
+4. Select 
+>  string query = "Select Location from Zoo where Id = @Zooid";
+
+#!markdown
+
+# 2. Linq 
++ retrieving data from a data source
++ by using LINQ Query Operation we can get data from different data source
++ Array, Databases, XML files and many more are valid source for query operation
++ there are 3 parts of a query operation
+ 1. Obtain a data source
+ 2. create the query
+ 3. execute the query
+
+
+## 1. Examples of Linq use case 
+
+1. to sort collection in ascending order
+2. print values in an array sorted by their size but ignore values greater than 5
+3. Find Odd numbers from a given array
+
+#!csharp
+
+string[] names = new string[]{"suraj","Claus","bill gates"}; // the data source
+var query = from name in names  // query creation
+            orderby name ascending
+            select name;
+
+foreach(var i in query) // query execution 
+  Console.WriteLine(i);                 
+
+#!csharp
+
+int[] numbers = new int[] {20,40,2,10,5};
+var query = from number in numbers
+            where number > 5
+            orderby number descending
+            select number; 
+
+foreach(var i in query) // query execution 
+  Console.WriteLine(i);         
+            
+
+#!csharp
+
+            int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            OddNumbers(numbers);
+
+            Console.ReadLine();
+        
+
+        static void OddNumbers(int[] numbers)
+        {
+            Console.WriteLine("Odd Numbers :" );
+            IEnumerable<int> oddNumbers = from number in numbers
+                                          where number % 2 != 0
+                                          select number;
+            foreach (var i in oddNumbers)
+            {
+                Console.WriteLine(i);
+            }
+
+             
+        }
+
+#!markdown
+
+## 2. Linq Operation with Collection
++ sort by one parameter 
+```c#
+IEnumerable<Student> maleStudents = from student in students
+                                                where student.Gender == "male"
+                                                select student;
+```
+
++ order element of a collection 
+```c#
+var sortStudents = from student in students orderby student.Age select student;
+
+```
++ join 
+```c#
+          IEnumerable<Student> yaleStudents =   from student in students
+                                                join university in universities
+                                                on student.UniversityId equals university.Id
+                                                where university.Name == "Yale"
+                                                select student;
+
+```
++ Another way to sort Collection using Entension methods of linq 
+
+#!csharp
+
+int[] someInts = { 30, 10, 20, 4, 5, 50 };
+IEnumerable<int> sortInts = from i in someInts orderby i select i;
+Console.WriteLine("Array sorted in asc order : ");
+
+foreach (int i in sortInts)
+{
+    Console.Write(i + " ");
+}
+Console.WriteLine();
+
+// two ways to use linq
+IEnumerable<int> reverseInts1 = from i in someInts orderby i descending select i;
+IEnumerable<int> reverseInts = sortInts.Reverse();
+Console.WriteLine("Array sorted in desc order : ");
+foreach (int i in reverseInts)
+{
+    Console.Write(i + " ");
+}
+Console.WriteLine();
+
+#!markdown
+
++ create new Collection using Linq 
+
+```c#
+            var newCollection = from s in students
+                                join u in universities
+                                 on s.UniversityId equals u.Id
+                                orderby s.Name
+                                select new { StudentName = s.Name, UniversityName = u.Name };
+
+            foreach (var col in newCollection)
+            {
+                Console.WriteLine($"Student {col.StudentName} from University {col.UniversityName}");
+
+            }
+```
+
+#!markdown
+
+## 3. LINQ with XML
+
++ Create XMl document from string 
+
+```c#
+string studentsXMl = @"<Student> ... </Student>"
+           // create an XML document 
+  			XDocument studentsXDoc = new XDocument();
+			studentsXDoc = XDocument.Parse(studentsXMl);
+```
++ use linq on xml document 
+
+#!csharp
+
+using System.Xml.Linq;
+string studentsXMl =
+@"<Students>
+   <Student>
+       <Name>Toni</Name>
+       <Age>28</Age>
+       <University>Yale</University>
+   </Student>
+   <Student>
+       <Name>Jake</Name>
+       <Age>25</Age>
+       <University>Oxford</University>
+   </Student>
+   <Student>
+       <Name>Rice</Name>
+       <Age>26</Age>
+       <University>Carla</University>
+   </Student>
+</Students>";
+           // create an XML document 
+           XDocument studentsXDoc = new XDocument();
+           studentsXDoc = XDocument.Parse(studentsXMl);
+
+           // create Student object from xml
+           var students = from student in studentsXDoc.Descendants("Student")
+                          select new
+                          {
+                              Name = student.Element("Name").Value,
+                              Age = student.Element("Age").Value,
+                              University = student.Element("University").Value
+
+                          };
+
+                Console.WriteLine("Students info: ");
+           foreach (var i in students)
+           {
+               Console.WriteLine($"Student {i.Name} , Age {i.Age} in {i.University} University");
+           }
+
+
+           Console.WriteLine("Student Sorted By Age");
+
+           // add sorting to linq 
+           var SortedByAge = from student in studentsXDoc.Descendants("Student")
+                             orderby student.Element("Age").Value
+                             select new
+                             {
+                                 Name = student.Element("Name").Value,
+                                 Age = student.Element("Age").Value,
+                                 University = student.Element("University").Value
+                             };
+
+           foreach (var i in SortedByAge)
+           {
+               Console.WriteLine($"Student {i.Name} , Age {i.Age} in {i.University} University");
+           }
+
+#!markdown
+
+## 4. Linq to SQL 
+
++ setup for linq to sql 
++ check "linq to sql tools" are installed on VS
++ create Data Source and get connection string 
++ use  LinqToSqlDataClassesDataContext class for linq operation on database
++ use .dbml designer to add tables and convert them to objects of C#.
+```c#
+// in main class 
+  LinqToSqlDataClassesDataContext dataContext;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["LinqToSql_WPF.Properties.Settings.SurajTrainingDBConnectionString"].ConnectionString;
+
+            dataContext = new LinqToSqlDataClassesDataContext(connectionString);
+        }
+
+
+
+```
+
++ Insert data to table using linq to sql (dataContext)
+
+```c#
+        public void InsertUniversities()
+        {
+
+            dataContext.ExecuteCommand("delete from University");
+
+            University yale = new University();
+            University oxford = new University();
+
+            oxford.Name = "Oxford";
+
+            yale.Name = "Yale";
+
+            
+            dataContext.Universities.InsertOnSubmit(yale);
+            dataContext.Universities.InsertOnSubmit(oxford);
+
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Universities;
+        }
+```
+
++ insert list of object to table
+```c#
+    public void InsertStudents()
+        {
+            dataContext.ExecuteCommand("delete from Student");
+
+            University yale = dataContext.Universities.First(un => un.Name.Equals("Yale"));
+            University oxford= dataContext.Universities.First(un => un.Name.Equals("Oxford"));
+
+            List<Student> studentList = new List<Student>()
+            {
+                 new Student() {Name = "Raj",Gender = "Male",UniversityId = yale.Id,University = yale },
+                 new Student() {Name = "Suraj",Gender = "Male",UniversityId = oxford.Id,University = oxford }
+            };
+           
+
+            dataContext.Students.InsertAllOnSubmit(studentList);
+
+            dataContext.SubmitChanges();
+            // WPF datagrid object ,setting item source
+            MainDataGrid.ItemsSource = dataContext.Students;
+        }
+```
+
++ Get data from table
+```c#
+   public void GetUniversityOfStudent()
+        {
+            Student Raj = dataContext.Students.First(St => St.Name.Equals("Raj"));
+
+            University RajUniversity = Raj.University;
+           
+            List<University> universities = new List<University>();
+            universities.Add(RajUniversity);
+            MainDataGrid.ItemsSource = universities;
+        }
+
+       public void GetStudentLectures()
+        {
+            Student Raj = dataContext.Students.First(st => st.Name.Equals("Raj"));
+
+            var rajLectures = from s in Raj.StudentLectures select s.Lecture;
+
+            MainDataGrid.ItemsSource = rajLectures;
+
+        }
+    }
+```
+
++ get data two methods 
+
+```c#
+       public void  GetAllStudentFromYaleUniversity()
+        {
+            var students = dataContext.Students.Where(s => s.University.Name == "Yale").ToList();
+
+            MainDataGrid.ItemsSource = students;
+        }
+
+        public void GetAllStudentFromOxfordUniversity()
+        {
+            var students = from s in dataContext.Students
+                           where s.University.Name == "Oxford"
+                           select s;
+
+            MainDataGrid.ItemsSource = students;
+        }
+```
+
++ join 2 tables
+```c#
+ public void GetAllUniversitiesWithTransgenders()
+        {
+            var uniWithTrans = from s in dataContext.Students
+                               join u in dataContext.Universities
+                               on s.University equals u
+                               where s.Gender == "trans-gender"
+                               select u;
+
+            MainDataGrid.ItemsSource = uniWithTrans;
+        }
+
+        public void GetAllLecutresTaughtAtUniversity()
+        {
+            var lectureTaughtAtYale = from s in dataContext.Students
+                                      join sl in dataContext.StudentLectures
+                                      on s.Id equals sl.StudentId
+                                      where s.University.Name =="Yale"
+                                      select sl.Lecture;
+            MainDataGrid.ItemsSource = lectureTaughtAtYale;
+
+        }
+
+
+```
+
++ update and delete using linq 
+
+```c#
+ public void UpdateRaj()
+        {
+            Student Raj = dataContext.Students.FirstOrDefault(st => st.Name == "Raj");
+
+            Raj.Name = "Rajkumar";
+
+            dataContext.SubmitChanges();
+
+            MainDataGrid.ItemsSource = dataContext.Students;
+        }
+
+        public void DeleteAjay()
+        {
+            Student Ajay = dataContext.Students.FirstOrDefault(st => st.Name == "Ajay");
+
+            dataContext.Students.DeleteOnSubmit(Ajay);
+
+            dataContext.SubmitChanges();
+            MainDataGrid.ItemsSource = dataContext.Students;
+
+        }
+```

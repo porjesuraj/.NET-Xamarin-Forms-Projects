@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:controls="clr-namespace:App2"
+             x:Class="App2.MainPage" BackgroundColor="LightGray">
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="CardViewControlTemplate">
+            <Frame BindingContext="{Binding Source={RelativeSource TemplatedParent}}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.4*" />
+                        <RowDefinition Height="0.2*" />
+                        <RowDefinition Height="0.4*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Grid.Row="0"
+                         Text="{Binding CardTitle}"
+                         FontAttributes="Bold"
+                         FontSize="Large"
+                         VerticalTextAlignment="Center"
+                         HorizontalTextAlignment="Start" />
+                <BoxView BackgroundColor="Blue" Grid.Row="1"  />
+                <Label Grid.Row="2"
+
+                         Text="{Binding CardDescription}"
+                         VerticalTextAlignment="Start"
+                         VerticalOptions="Fill"
+                         HorizontalOptions="Fill" />
+                </Grid>
+            </Frame>
+        </ControlTemplate>
+
+ 
+    </ContentPage.Resources>
+
+    <StackLayout Margin="30" BackgroundColor="Gray" >
+        <controls:CardView 
+                           CardTitle="Suraj Porje"
+                           CardDescription="Job at cybage "
+                           
+                           ControlTemplate="{StaticResource CardViewControlTemplate}" />
+        <controls:CardView 
+                           CardTitle="Sagar "
+                           CardDescription="Business "
+                           
+                           
+                           ControlTemplate="{StaticResource CardViewControlTemplate}" />
+        <controls:CardView 
+                           CardTitle="Kiran"
+                           CardDescription="Thinking "
+                          
+                           
+                           ControlTemplate="{StaticResource CardViewControlTemplate}" />
+    </StackLayout>
+
+</ContentPage>

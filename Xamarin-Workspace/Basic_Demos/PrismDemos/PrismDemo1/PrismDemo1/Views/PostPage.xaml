@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="PrismDemo1.Views.PostPage">
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="60" BackgroundColor="Black" >
+                <Button Text="Add" TextColor="#41F700"  Command="{Binding LoadPostCommand}"    Padding="5" BackgroundColor="Black" />
+                <Button Text="Update" TextColor="Aqua"  BackgroundColor="Black"  />
+                <Button Text="Delete" TextColor="#F73A00"   BackgroundColor="Black" />
+            </StackLayout>
+
+            <Label Text="{Binding Poster}" />
+            <ListView x:Name="postView" ItemsSource="{Binding Posts}" >
+
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="Auto"  />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding id}" Grid.Column="0"  TextColor="#E63427"/>
+                                <Label Text="{Binding title}" Grid.Column="1" TextColor="Black" FontSize="15" />
+
+                            </Grid>
+
+
+
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
